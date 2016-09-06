@@ -2,11 +2,20 @@ html {
     height: 100vh;
 }
 
-h1, h2, h3, h4, h5, p, a, label, button {
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a,
+label,
+button {
     color: dimgray;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
     cursor: pointer;
 }
 
@@ -106,7 +115,10 @@ body {
 
 #main {
     transition: margin-left .5s;
+<<<<<<< Updated upstream
     transition: background-color .5s;
+=======
+>>>>>>> Stashed changes
 }
 
 #hm {
@@ -138,13 +150,19 @@ body {
     border: 2px solid;
     border-radius: 25px;
     border-color: rgb(230, 230, 230);
+    overflow: auto;
+    height: 100%
 }
 
-
 .row {
+<<<<<<< Updated upstream
     margin: 0;   
 }
 
 .container-fluid {
     transition: background-color .5s;
 }
+=======
+    margin: 0;
+}
+>>>>>>> Stashed changes

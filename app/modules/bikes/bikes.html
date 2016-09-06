@@ -1,105 +1,125 @@
 <div class="container-fluid white">
-    <div class="row">
-        <h4>Bikes:</h4>
-        <hr/>
-        <table>
-            <tr>
-                <th>Bike ID</th>
-                <th>Brand</th>
-                <th>Damaged</th>
-                <th>Available</th>
-                <th>BikeType Id</th>
-                <th>Actions</th>
-            </tr>
 
-            <tr ng-repeat="bike in bikes">
-                <td>{{bike.id}}</td>
-                <td>{{bike.brand}}</td>
-                <td>{{bike.damaged}}</td>
-                <td>{{bike.available}}</td>
-                <td>{{bike.bikeType}}</td>
-                <td>
+    <br>
+
+    <center>
+        <div class="squareContainer">
+            <div class="row" style="width:90%">
+
+                <center>
+                    <h1>Bikes</h1>
+                </center>
+                <hr/>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Bike ID</th>
+                        <th>Brand</th>
+                        <th>Damaged</th>
+                        <th>Available</th>
+                        <th>BikeType</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    <tr ng-repeat="bike in bikes" class="success">
+                        <td>{{bike.id}}</td>
+                        <td>{{bike.brand}}</td>
+                        <td>{{bike.damaged}}</td>
+                        <td>{{bike.available}}</td>
+                        <td>{{bike.bikeType}}</td>
+                        <td>
                             <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                             <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
                         </td>
-            </tr>
-        </table>
-    </div>
-    <hr/>
-    <button class="btn btn-default" ng-click="addBike()">Add new Bike</button>
-    <div class="row" ng-show="addingBike">
-        <div class="form-group">
-            <label for="brand">Bike Brand:</label>
-            <input id="brand" type="text" class="input form-control" ng-model="newBike.brand">
-        </div>
-        <label class="radio-inline">
-            <input type="radio" ng-model="customType" value="false" ng-change="nuevoServicio=null;serviceError=null;">
-            <p>Select existing Bike Type</p>
-        </label>
-        <label class="radio-inline">
-            <input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;">
-            <p>Create new Bike Type</p>
-        </label>
-        <div class="row" ng-show="customType == 'false'">
-            <select class="form-control" ng-options='type as type.name for type in bikeTypes' ng-model='type' ng-change="typeError=null;">
-                <option value="" disabled selected>Select the type for this bike</option>
-            </select>
-            <!--            <div class="btn-sp-blue lefty" ng-click="addService()" ng-disabled="addingService">ADD SERVICE</div>-->
-        </div>
-        <div class="row" ng-show="customType == 'true'">
-            <div class="col-sm-10 col-md-4">
-                <div class="row">
-                    <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name">
-                </div>
-                <div class="row">
-                    <input class="form-control" type="text" ng-model="newType.capacity" placeholder="Type capacity">
-                </div>
+                    </tr>
+                </table>
             </div>
-            <div class="col-sm-10" style="margin-top: 6vh;">
-                <div ng-click="saveType()" class="btn btn-default" ng-disabled="addingType">Save Bike type</div>
-            </div>
-        </div>
-        <div class="row">
-            <button class="btn btn-default" ng-click="saveBike()">Save Bike</button>
-            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-        </div>
-    </div>
-    <div ng-show="editMode" class="well">
-            <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
-                <fieldset>
-                    <input id="id" class="form-control" type="hidden" ng-model="newBike.id"/>
-                    
-                        <label for="name" class="col-md-2 control-label">Brand:</label>
-                        <div class="col-md-10">
+            <hr/>
+
+
+            <div ng-show="editMode" class="well">
+                <h3>Editing Bike</h3>
+                <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
+                    <fieldset>
+                        <input id="id" class="form-control" type="hidden" ng-model="newBike.id" />
+
+                        <div class="col-md-12">
+                            <h4>Brand</h4>
                             <input id="name" name="name" class="form-control" type="text" ng-model="newBike.brand" required />
                         </div>
-                    
-                    
-                        <label for="damaged" class="col-md-2 control-label">Damaged</label>
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="newBike.damaged" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;">
-                            <p>Not Damaged</p>
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="newBike.damaged" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;">
-                            <p>Damaged</p>
-                        </label>
-                    
-                        <label for="available" class="col-md-2 control-label">Available</label>
-                    <label class="radio-inline">
-                            <input type="radio" ng-model="newBike.available" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;">
-                            <p>Not Available</p>
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="newBike.available" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;">
-                            <p>Available</p>
-                        </label>
-                    
-                </fieldset>
-                        <div class="row">
-            <button class="btn btn-default" ng-click="saveEditedBike()">Save Bike</button>
-            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                        <br>
+                        <br>
+                        <div class="col-md-12">
+                            <h4>Condition</h4>
+                            <input type="radio" ng-model="newBike.damaged" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Damaged
+                            <input type="radio" ng-model="newBike.damaged" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Damaged
+                        </div>
+
+                        <div class="col-md-12">
+                            <br>
+                            <h4>Availability</h4>
+                            <input type="radio" ng-model="newBike.available" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Available
+                            <input type="radio" ng-model="newBike.available" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Available
+                        </div>
+
+                    </fieldset>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-default" ng-click="saveEditedBike()">Save Bike</button>
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <button class="btn btn-default" ng-click="addBike()">Add new Bike</button>
+            <div class="row" ng-show="addingBike">
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <h4>Brand</h4>
+                        <input id="brand" class="form-control" type="text" ng-model="newBike.brand" required/>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <br>
+                    <h4>BikeType</h4>
+                    <input type="radio" ng-model="customType" value="false" ng-change="nuevoServicio=null;serviceError=null;"> Existing BikeType
+
+                    <input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;"> Create BikeType
+
+                </div>
+
+                <div class="col-md-8 col-md-offset-2" ng-show="customType == 'false'">
+
+                    <hr/>
+                    <select class="form-control" ng-options='type as type.name for type in bikeTypes' ng-model='type' ng-change="typeError=null;">
+                        <option value="" disabled selected>Select the type for this bike</option>
+                    </select>
+                    <hr/>
+
+                </div>
+                <div class="col-md-8 col-md-offset-2" ng-show="customType == 'true'">
+
+                    <hr/>
+                    <h5>Type Name</h5>
+                    <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name">
+                    <h5>Type Capacity</h5>
+                    <input class="form-control" type="text" ng-model="newType.capacity" placeholder="Type capacity">
+                    <br>
+
+                    <div ng-click="saveType()" class="btn btn-default" ng-disabled="addingType">Save Bike type</div>
+                    <hr/>
+
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn btn-default" ng-click="saveBike()">Save Bike</button>
+                    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+
+            <hr/>
+
         </div>
-            </form>
-        </div>
+    </center>
 </div>
