@@ -7,17 +7,22 @@
         <a ng-click="goToPoints()">Return Points</a>
         <a href="#">Penalties</a>
         <br>
-        <a href="#">Sign Out</a>
+        <a ng-click="logOut()">LogOut</a>
     </div>
     <div id="main">
 
         <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" ng-click="openNav()">&#9776; Menu</span>
 
+        <center>
+            <h1>Dashboard</h1>
+        </center>
+        <br>
+        <center>
+            <div class="squareContainer">
+                <h5>Nothing to show yet</h5>
+            </div>
+        </center>
 
-        <div class="button-group buttonBox">
-            <button class="btn btn-default" ng-click="goToBikes()">Navigate to Bikes</button>
-            <button class="btn btn-default" ng-click="goToPoints()">Navigate to Return Points</button>
-        </div>
     </div>
 </div>
 <link rel="stylesheet" href="/modules/dashboard/dashboard.css">

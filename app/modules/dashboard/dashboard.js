@@ -33,14 +33,19 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
     $scope.goToPoints = function () {
         $location.path("/rentplace");
     }
-$scope.openNav = function () {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
+    $scope.openNav = function () {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
 
-$scope.closeNav = function () {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
+    $scope.closeNav = function () {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+    $scope.logOut = function () {
+        $location.path("/login");
+        $localStorage.userInfo = undefined;
+    }
 
 }]);
