@@ -1,7 +1,23 @@
 <div class="container-fluid">
-    <div class="button-group buttonBox">
-        <button class="btn btn-default" ng-click="goToBikes()">Navigate to Bikes</button>
-        <button class="btn btn-default" ng-click="goToPoints()">Navigate to Return Points</button>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a ng-click="goToBikes()">Bikes</a>
+        <a ng-click="goToPoints()">Return Points</a>
+        <a href="#">Penalties</a>
+        <br>
+        <a href="#">Sign Out</a>
+    </div>
+    <div id="main">
+
+        <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" ng-click="openNav()">&#9776; Menu</span>
+
+
+        <div class="button-group buttonBox">
+            <button class="btn btn-default" ng-click="goToBikes()">Navigate to Bikes</button>
+            <button class="btn btn-default" ng-click="goToPoints()">Navigate to Return Points</button>
+        </div>
     </div>
 </div>
 <link rel="stylesheet" href="/modules/dashboard/dashboard.css">

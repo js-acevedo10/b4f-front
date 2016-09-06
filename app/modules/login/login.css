@@ -1,6 +1,10 @@
-
 .loginBox {
-    margin-top: 10%;
     padding: 20px 35px;
     box-shadow: 0px 0px 3px grey;
+    background-color: white;
+}
+
+button {
+    color: white;
+    background-color: #2FAC66;
 }
