@@ -5,7 +5,14 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/bikes', {
         templateUrl: 'modules/bikes/bikes.html',
-        controller: 'BikesCtrl'
+        controller: 'BikesCtrl',
+        resolve: {
+            "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                if ($localStorage.userInfo == undefined) {
+                    $location.path('/login');
+                }
+            }]
+        }
     });
     }])
 

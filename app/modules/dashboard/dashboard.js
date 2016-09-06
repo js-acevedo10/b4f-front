@@ -5,7 +5,14 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/dashboard', {
         templateUrl: 'modules/dashboard/dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
+        resolve: {
+            "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                if ($localStorage.userInfo == undefined) {
+                    $location.path('/login');
+                }
+            }]
+        }
     });
 }])
 

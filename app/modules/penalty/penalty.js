@@ -5,7 +5,14 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/penalty', {
         templateUrl: 'modules/penalty/penalty.html',
-        controller: 'PenaltyCtrl'
+        controller: 'PenaltyCtrl',
+        resolve: {
+            "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                if ($localStorage.userInfo == undefined) {
+                    $location.path('/login');
+                }
+            }]
+        }
     });
     }])
 

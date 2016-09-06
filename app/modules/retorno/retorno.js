@@ -5,9 +5,16 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/rentplace', {
         templateUrl: 'modules/retorno/retorno.html',
-        controller: 'PlaceCtrl'
+        controller: 'PlaceCtrl',
+        resolve: {
+            "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                if ($localStorage.userInfo == undefined) {
+                    $location.path('/login');
+                }
+            }]
+        }
     });
-    }])
+}])
 
 .controller('PlaceCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
     $scope.editMode=false;
