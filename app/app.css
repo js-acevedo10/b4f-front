@@ -38,20 +38,31 @@ label,
     height: calc(100vh - 43px);
 }
 
+.white {
+    background-color: white;
+    height: -moz-calc(100vh - 43px);
+    height: -webkit-calc(100vh - 43px);
+    height: calc(100vh - 43px);
+}
+
 .greenNav {
     background-color: #2FAC66;
+    transition: 0.5s;
 }
 
 .greenFont {
     color: white !important;
+    transition: 0.5s;
 }
 
 .whiteNav {
     background-color: white;
+    transition: 0.5s;
 }
 
 .whiteFont {
     color: #2FAC66 !important;
+    transition: 0.5s;
 }
 
 body {
@@ -95,7 +106,7 @@ body {
 
 #main {
     transition: margin-left .5s;
-    
+    transition: background-color .5s;
 }
 
 #hm {
@@ -132,4 +143,8 @@ body {
 
 .row {
     margin: 0;   
+}
+
+.container-fluid {
+    transition: background-color .5s;
 }
