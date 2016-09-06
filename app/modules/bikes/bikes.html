@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="row" ng-repeat="bike in bikes">
+            {{bike}}
+        </div>
+    </div>
+    <button class="btn btn-default" ng-click="addBike()">Add new Bike</button>
+    <div class="row" ng-show="addingBike">
+        <div class="form-group">
+            <label for="brand">Bike Brand:</label>
+            <input id="brand" type="text" class="input form-control" ng-model="newBike.brand">
+        </div>
+        <label class="radio-inline"><input type="radio" ng-model="customType" value="false" ng-change="nuevoServicio=null;serviceError=null;"><p>Select existing Bike Type</p></label>
+        <label class="radio-inline"><input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;"><p>Create new Bike Type</p></label>
+        <div class="row" ng-show="customType == 'false'">
+            <select class="form-control" ng-options='type as type.Name for type in bikeTypes' ng-model='newType' ng-change="typeError=null;"><option value="" disabled selected>Select the type for this bike</option></select>
+<!--            <div class="btn-sp-blue lefty" ng-click="addService()" ng-disabled="addingService">ADD SERVICE</div>-->
+        </div>
+        <div class="row" ng-show="customType == 'true'">
+            <div class="col-sm-10 col-md-4">
+                <div class="row">
+                    <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name">
+                </div>
+                <div class="row">
+                    <input class="form-control" type="text" ng-model="newType.capacity" placeholder="Type capacity">
+                </div>
+            </div>
+            <div class="col-sm-10" style="margin-top: 6vh;">
+                <div ng-click="saveType()" class="btn btn-default" ng-disabled="addingType">Save Bike type</div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" ng-click="saveBike()">Save Bike</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,8 @@ angular.module('b4f', [
     'ngRoute',
     'ngStorage',
     'b4f.login',
-    'b4f.dashboard'
+    'b4f.dashboard',
+    'b4f.bikes'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
