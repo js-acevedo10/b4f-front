@@ -32,7 +32,7 @@
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
     </div>
     <div id="main" ng-class="isLoginNav()">
-        <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" id="hm" ng-click="openNav()"  ng-class="isLoginFont()">&#9776; Menu</span>
+        <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" id="hm" ng-click="openNav()" ng-class="isLogged()?isLoginFont():'whiteFont'">&#9776; Menu</span>
         <div ng-view></div>
     </div>
     <!-- In production use:
