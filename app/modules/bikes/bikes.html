@@ -1,37 +1,37 @@
 <div class="container-fluid white">
-
     <br>
-
     <center>
-        <div class="squareContainer">
+        <div class="squareContainer content">
             <div class="row" style="width:90%">
 
                 <center>
                     <h1>Bikes</h1>
                 </center>
                 <hr/>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Bike ID</th>
-                        <th>Brand</th>
-                        <th>Damaged</th>
-                        <th>Available</th>
-                        <th>BikeType</th>
-                        <th>Actions</th>
-                    </tr>
+                <div style="height: 40vh !important; overflow: scroll;">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Bike ID</th>
+                            <th>Brand</th>
+                            <th>Damaged</th>
+                            <th>Available</th>
+                            <th>BikeType</th>
+                            <th>Actions</th>
+                        </tr>
 
-                    <tr ng-repeat="bike in bikes" class="success">
-                        <td>{{bike.id}}</td>
-                        <td>{{bike.brand}}</td>
-                        <td>{{bike.damaged}}</td>
-                        <td>{{bike.available}}</td>
-                        <td>{{bike.bikeType}}</td>
-                        <td>
-                            <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                            <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                        </td>
-                    </tr>
-                </table>
+                        <tr ng-repeat="bike in bikes" class="success">
+                            <td>{{bike.id}}</td>
+                            <td>{{bike.brand}}</td>
+                            <td>{{bike.damaged}}</td>
+                            <td>{{bike.available}}</td>
+                            <td>{{bike.bikeType}}</td>
+                            <td>
+                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <hr/>
 
@@ -123,3 +123,4 @@
         </div>
     </center>
 </div>
+<link rel="stylesheet" href="/modules/bikes/bikes.css">
