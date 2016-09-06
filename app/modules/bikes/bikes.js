@@ -94,7 +94,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             },
             data: JSON.stringify($scope.newBike)
         }).then(function successCallback(response) {
-            $scope.bikeTypes = response.data;
+            $scope.bikes = response.data;
         }, function errorCallback(response)  {
 
         }).finally(function () {

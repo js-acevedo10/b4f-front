@@ -8,7 +8,8 @@ angular.module('b4f', [
     'b4f.dashboard',
     'b4f.register',
     'b4f.bikes',
-    'b4f.retorno'
+    'b4f.retorno',
+    'b4f.penalty'
 ]).
 config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row"><h3>Penalties</h3></div>
+    <div class="row">
+        <div class="col-md-6 col-sm-10">
+            <div class="row" ng-repeat="client in clients" ng-click="searchClientPenalties(client.id)">{{client.name}}</div>
+        </div>
+        <div class="col-md-6 col-sm-10">
+            <div class="row" ng-repear="penalty in penalties">penalty</div>
+        </div>
+    </div>
+</div>
