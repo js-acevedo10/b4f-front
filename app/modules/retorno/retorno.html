@@ -2,6 +2,10 @@
     <div class="row">
         <div class="row" ng-repeat="place in places">
             {{place}}
+            <p class="text-center">
+                            <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editPlace(place)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                            <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deletePlace(place)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                        </p>
         </div>
     </div>
     <button class="btn btn-default" ng-click="addPlace()">Add new Place</button>
@@ -20,4 +24,28 @@
             <button class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
     </div>
+    <div ng-show="editMode" class="well">
+            <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveRecord()">
+                <fieldset>
+                    <input id="id" class="form-control" type="hidden" ng-model="newPlace.id"/>
+                    
+                        <label for="address" class="col-md-2 control-label">Address</label>
+                        <div class="col-md-10">
+                            <input id="address" name="address" class="form-control" type="text" ng-model="newPlace.address" required />
+                        </div>
+                    
+                    
+                        <label for="name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input id="name" name="name" class="form-control" type="text" ng-model="newPlace.name" required />
+                        </div>
+    
+                    
+                </fieldset>
+                        <div class="row">
+            <button class="btn btn-default" ng-click="saveEditedPlace()">Save Place</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+            </form>
+        </div>
 </div>
