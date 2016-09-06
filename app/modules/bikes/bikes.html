@@ -13,7 +13,7 @@
         <label class="radio-inline"><input type="radio" ng-model="customType" value="false" ng-change="nuevoServicio=null;serviceError=null;"><p>Select existing Bike Type</p></label>
         <label class="radio-inline"><input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;"><p>Create new Bike Type</p></label>
         <div class="row" ng-show="customType == 'false'">
-            <select class="form-control" ng-options='type as type.Name for type in bikeTypes' ng-model='newType' ng-change="typeError=null;"><option value="" disabled selected>Select the type for this bike</option></select>
+            <select class="form-control" ng-options='type as type.Name for type in bikeTypes' ng-model='type' ng-change="typeError=null;"><option value="" disabled selected>Select the type for this bike</option></select>
 <!--            <div class="btn-sp-blue lefty" ng-click="addService()" ng-disabled="addingService">ADD SERVICE</div>-->
         </div>
         <div class="row" ng-show="customType == 'true'">

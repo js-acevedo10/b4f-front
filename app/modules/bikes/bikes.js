@@ -67,11 +67,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                     }).finally(function () {
                         $scope.addingType = false;
                     });
-                }else{
-                    //Agregar al modelo del new
-                    $scope.type = $scope.newType;
-                    $scope.newType = undefined;
-                    $scope.customType = false;
                 }
             } else {
                 $scope.addingType = false;
@@ -89,7 +84,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.saveBike = function(){
         $http({
             method: 'POST',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.name,
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.id,
             headers: {
                 Authorization: auth
             },
