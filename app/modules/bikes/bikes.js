@@ -17,6 +17,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $http({
         method: 'GET',
         url: 'http://bikes4freeg5.herokuapp.com/bikes',
+//        url: 'http://localhost:8080/bikes',
         headers: {
             Authorization: auth
         }
@@ -30,6 +31,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $http({
         method: 'GET',
         url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
+//        url: 'http://localhost:8080/bikeTypes',
         headers: {
             Authorization: auth
         }
@@ -53,6 +55,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                     $http({
                         method: 'POST',
                         url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
+//                        url: 'http://localhost:8080/bikeTypes',
                         headers: {
                             Authorization: auth
                         },
@@ -84,7 +87,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.saveBike = function(){
         $http({
             method: 'POST',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.Id,
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.id,
+//            url: 'http://localhost:8080/bikes/'+$scope.type.Id,
             headers: {
                 Authorization: auth
             },
