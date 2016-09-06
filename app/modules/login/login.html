@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3 loginBox">
+        <form class="form" name="login">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="input form-control" name="username" id="username" ng-model="loginForm.username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="input form-control" name="password" id="password" ng-model="loginForm.password">
+            </div>
+            <button class="btn btn-default" type="submit" ng-click="submit()">Login</button>
+        </form>
+    </div>
+</div>
+<link rel="stylesheet" href="/modules/login/login.css">

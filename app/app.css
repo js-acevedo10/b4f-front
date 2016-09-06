@@ -1,0 +1,8 @@
+.btn:focus {
+    outline: none;
+}
+
+.btn,
+.input {
+    border-radius: 0;
+}
