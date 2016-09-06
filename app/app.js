@@ -6,10 +6,13 @@ angular.module('b4f', [
     'ngStorage',
     'b4f.login',
     'b4f.dashboard',
-    'b4f.bikes'
+    'b4f.bikes',
+    'b4f.retorno'
 ]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/login'});
+    $routeProvider.otherwise({
+        redirectTo: '/login'
+    });
 }]);
