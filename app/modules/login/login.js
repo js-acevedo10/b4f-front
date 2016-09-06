@@ -4,8 +4,9 @@ angular.module('b4f.login', ['ngRoute', 'ngStorage'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
-    templateUrl: 'modules/login/login.html',
-    controller: 'LoginCtrl'
+        templateUrl: 'modules/login/login.html',
+        controller: 'LoginCtrl'
+        
   });
 }])
 

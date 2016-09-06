@@ -6,6 +6,7 @@ angular.module('b4f', [
     'ngStorage',
     'b4f.login',
     'b4f.dashboard',
+    'b4f.register',
     'b4f.bikes',
     'b4f.retorno'
 ]).

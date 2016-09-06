@@ -27,5 +27,10 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
         })
     }
     
-    $scope.getBike('57ce22b48e2eaa2462313b2f');
+    $scope.goToBikes = function() {
+        $location.path("/bikes");
+    }
+    $scope.goToPoints = function() {
+        $location.path("/rentplace");
+    }
 }]);
