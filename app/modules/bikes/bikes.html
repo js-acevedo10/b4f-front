@@ -9,6 +9,7 @@
                 <th>Damaged</th>
                 <th>Available</th>
                 <th>BikeType Id</th>
+                <th>Actions</th>
             </tr>
 
             <tr ng-repeat="bike in bikes">
@@ -17,6 +18,10 @@
                 <td>{{bike.damaged}}</td>
                 <td>{{bike.available}}</td>
                 <td>{{bike.bikeType}}</td>
+                <td>
+                            <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                            <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                        </td>
             </tr>
         </table>
     </div>
@@ -59,4 +64,42 @@
             <button class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
     </div>
+    <div ng-show="editMode" class="well">
+            <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
+                <fieldset>
+                    <input id="id" class="form-control" type="hidden" ng-model="newBike.id"/>
+                    
+                        <label for="name" class="col-md-2 control-label">Brand:</label>
+                        <div class="col-md-10">
+                            <input id="name" name="name" class="form-control" type="text" ng-model="newBike.brand" required />
+                        </div>
+                    
+                    
+                        <label for="damaged" class="col-md-2 control-label">Damaged</label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="newBike.damaged" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;">
+                            <p>Not Damaged</p>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="newBike.damaged" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;">
+                            <p>Damaged</p>
+                        </label>
+                    
+                        <label for="available" class="col-md-2 control-label">Available</label>
+                    <label class="radio-inline">
+                            <input type="radio" ng-model="newBike.available" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;">
+                            <p>Not Available</p>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="newBike.available" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;">
+                            <p>Available</p>
+                        </label>
+                    
+                </fieldset>
+                        <div class="row">
+            <button class="btn btn-default" ng-click="saveEditedBike()">Save Bike</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+            </form>
+        </div>
 </div>

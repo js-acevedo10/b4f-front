@@ -13,8 +13,9 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
 
     var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
 
-
-    $http({
+    $scope.editMode = false;
+    $scope.fetchBikes = function(){
+        $http({
         method: 'GET',
         url: 'http://bikes4freeg5.herokuapp.com/bikes',
 //        url: 'http://localhost:8080/bikes',
@@ -27,8 +28,11 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     }, function errorCallback(response)  {
 
     })
+    }
+    $scope.fetchBikes();
 
-    $http({
+    $scope.fetchBikeTypes= function(){
+        $http({
         method: 'GET',
         url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
 //        url: 'http://localhost:8080/bikeTypes',
@@ -41,6 +45,10 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
 
     })
 
+    }
+     $scope.fetchBikeTypes();
+    
+    
 
     $scope.addBike = function () {
         $scope.addingBike = true;
@@ -82,8 +90,26 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.cancel = function(){
         $scope.addingBike = false;
         $scope.newBike = undefined;
+        $scope.editMode = false;
     }
-    
+    $scope.editBike = function(bike){
+         $http({
+        method: 'GET',
+        url: 'http://bikes4freeg5.herokuapp.com/bikes/'+bike.id,
+        headers: {
+            Authorization: auth
+        }
+    }).then(function successCallback(response) {
+        $scope.newBike = response.data;
+        console.log($scope.newBike);
+        $scope.editMode=true;
+             return response;
+             
+    }, function errorCallback(response)  {
+        console.log("error finding one bike: ");
+        console.log(response);
+    })
+    }
     $scope.saveBike = function(){
         $http({
             method: 'POST',
@@ -100,7 +126,51 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         }).finally(function () {
             $scope.addingBike = false;
             $scope.newBike = undefined;
+            $scope,editMode=false;
+            $scope.fetchBikes();
+            $scope.fetchBikeTypes();
         });
     }
+     $scope.saveEditedBike = function(){
+        $http({
+            method: 'PUT',
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.newBike.id,
+//            url: 'http://localhost:8080/bikes/'+$scope.type.Id,
+            headers: {
+                Authorization: auth
+            },
+            data: JSON.stringify($scope.newBike)
+        }).then(function successCallback(response) {
+            $scope.bikes = response.data;
+        }, function errorCallback(response)  {
+
+        }).finally(function () {
+            $scope.addingBike = false;
+            $scope.newBike = undefined;
+            $scope.editMode=false;
+            $scope.fetchBikes();
+            $scope.fetchBikeTypes();
+        });
+    }
+     $scope.deleteBike = function (bike) {
+        
+        $http({
+        method: 'DELETE',
+        url: 'http://bikes4freeg5.herokuapp.com/bikes/'+bike.id,
+        headers: {
+            Authorization: auth
+        }
+            }).then(function successCallback(response) {
+                 console.log("Delete succeded ");
+                $scope.editMode=false;
+                $scope.fetchPlaces();
+                     return response;
+
+            }, function errorCallback(response)  {
+                console.log("error deleting one place: ");
+                console.log(response);
+            })    
+
+            };
 
     }]);
