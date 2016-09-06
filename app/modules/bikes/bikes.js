@@ -84,7 +84,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.saveBike = function(){
         $http({
             method: 'POST',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.id,
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/'+$scope.type.Id,
             headers: {
                 Authorization: auth
             },
