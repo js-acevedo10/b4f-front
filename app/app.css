@@ -1,3 +1,15 @@
+html {
+    height: 100vh;
+}
+
+h1, h2, h3, h4, h5, p, a, label, button {
+    color: dimgray;
+}
+
+a:hover, a:active {
+    cursor: pointer;
+}
+
 .btn:focus {
     outline: none;
 }
@@ -21,7 +33,25 @@ label,
 
 .green {
     background-color: #2FAC66;
-    height: 100vh;
+    height: -moz-calc(100vh - 43px);
+    height: -webkit-calc(100vh - 43px);
+    height: calc(100vh - 43px);
+}
+
+.greenNav {
+    background-color: #2FAC66;
+}
+
+.greenFont {
+    color: white !important;
+}
+
+.whiteNav {
+    background-color: white;
+}
+
+.whiteFont {
+    color: #2FAC66 !important;
 }
 
 body {
@@ -65,7 +95,11 @@ body {
 
 #main {
     transition: margin-left .5s;
-    padding: 16px;
+    
+}
+
+#hm {
+    color: white;
 }
 
 @media screen and (max-height: 450px) {
@@ -79,6 +113,11 @@ body {
 
 .hamburgerMenu {
     color: #2FAC66;
+    padding-left: 15px;
+}
+
+.closebtn {
+    padding-top: 0 !important;
 }
 
 .squareContainer {
@@ -88,4 +127,9 @@ body {
     border: 2px solid;
     border-radius: 25px;
     border-color: rgb(230, 230, 230);
+}
+
+
+.row {
+    margin: 0;   
 }

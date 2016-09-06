@@ -22,17 +22,17 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav" ng-if="isLogged()">
         <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
-        <a href="#!/dashboard">Dashboard</a>
-        <a ng-click="goToBikes()">Bikes</a>
-        <a ng-click="goToPoints()">Return Points</a>
-        <a href="#">Penalties</a>
-        <br>
-        <a ng-click="logOut()">LogOut</a>
+        <a href="#!/dashboard" ng-click="closeNav()">Dashboard</a>
+        <a href="#!/bikes" ng-click="closeNav()">Bikes</a>
+        <a href="#!/rentplace" ng-click="closeNav()">Venues</a>
+        <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
+        <hr>
+        <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
     </div>
-    <div id="main">
-        <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" ng-click="openNav()">&#9776; Menu</span>
+    <div id="main" ng-class="isLoginNav()">
+        <span style="font-size:30px;cursor:pointer" class="hamburgerMenu" id="hm" ng-click="openNav()"  ng-class="isLoginFont()">&#9776; Menu</span>
         <div ng-view></div>
     </div>
     <!-- In production use:

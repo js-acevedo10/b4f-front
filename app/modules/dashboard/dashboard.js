@@ -33,9 +33,4 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
     $scope.goToPoints = function () {
         $location.path("/rentplace");
     }
-    $scope.logOut = function () {
-        $location.path("/login");
-        $localStorage.userInfo = undefined;
-    }
-
 }]);
