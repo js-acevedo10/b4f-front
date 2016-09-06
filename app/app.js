@@ -13,14 +13,14 @@ angular.module('b4f', [
 ])
     .controller('NavController', ['$scope', '$localStorage', '$location', function ($scope, $localStorage, $location) {
         $scope.isLoginNav = function () {
-            if ($location.path() == "/login") {
+            if ($location.path() == "/login" || $location.path() == "/register") {
                 return 'greenNav';
             } else {
                 return 'whiteNav';
             }
         }
         $scope.isLoginFont = function () {
-            if ($location.path() == "/login") {
+            if ($location.path() == "/login" || $location.path() == "/register") {
                 return 'greenFont';
             } else {
                 return 'whiteFont';
