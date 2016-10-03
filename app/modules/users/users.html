@@ -1,19 +1,29 @@
 <div class="container-fluid white">
     <div class="row text-center header">
-        <h1>Users</h1></div>
+        <h1>Users</h1>
+    </div>
+    <div class="row text-center header" ng-show="error">
+        <h1>{{error}}</h1>
+    </div>
+    <div class="row text-center header" ng-show="succes">
+        <h1>{{succes}}</h1>
+    </div>
     <div class="content squareContainer row" cg-busy="{promise:loading,minDuration:1000}">
        <h2 class="inner-header">Clients</h2>
+       <button class="btn btn-sp-blue" ng-click="addClient()">Add Client</button>
         <div class="col-xs-12 clients">
             <div ng-repeat="client in clients" class="client-row">
                 <h3>{{client.name}}</h3>
-                <button  ng-click="removeClient(client.email)" class="btn btn-sp-red client">Remove client</button>
+                <p ng-class="isSuspended()">{{isSuspended()}}</p>
+                <button  ng-click="removeClient(client.id)" class="btn btn-sp-red client">Remove client</button>
             </div>
         </div>
         <h2 class="inner-header">Managers</h2>
+        <button class="btn btn-sp-blue" ng-click="addManager()">Add Manager</button>
         <div class="col-xs-12 clients">
             <div ng-repeat="manager in managers" class="client-row">
                 <h3>{{manager.name}}</h3>
-                <button  ng-click="removeManager(manager.email)" class="btn btn-sp-red client">Remove manager</button>
+                <button  ng-click="removeManager(manager.id)" class="btn btn-sp-red client">Remove manager</button>
             </div>
         </div>
         <h2 class="inner-header">Admins</h2>
@@ -22,26 +32,46 @@
                 <h3>{{admin.name}}</h3>
             </div>
         </div>
-        <!--        <div class="col-md-1 col-sm-12"></div>-->
-        <div class="col-md-6 col-sm-12 penalties" ng-show="penalties != undefined && penalties.length > 0">
-            <p class="detail-header">Penalties of {{currentUser}}</p>
-            <hr>
-            <div class="row" ng-repeat="penalty in penalties">
-                <div class="col-12">
-                    <div class="detail">Fee: {{penalty.fee}}</div>
-                </div>
-                <div class="col-12">
-                    <div class="label label-primary">Training required: {{penalty.trainingRequired?'Yes':'No'}}</div>
-                </div>
-                <div class="col-12">
-                    <div class="label" ng-class="penaltyClass(penalty.pending)">Payment pending: {{penalty.pending ? "Yes":"No"}}</div>
-                </div>
-                <hr>
+    </div>
+    <div>
+        <script type="text/ng-template" id="add-client.html">
+            <div class="modal-header text-center" cg-busy="{promise:addingClient,minDuration:1000}">
+                <h3 class="modal-title">Add Client</h3>
+                <br>
+                <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+                <br>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-12" ng-show="penalties.length == 0">
-            <p class="detail-header">{{currentUser}} has no penalties</p>
-        </div>
+            <div class="modal-body">
+                
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-sp-blue" type="button" ng-click="dismiss()">Close</button>
+
+            </div>
+        </script>
+    </div>
+    <div>
+        <script type="text/ng-template" id="add-manager.html">
+            <div class="modal-header text-center" cg-busy="{promise:addingManager,minDuration:1000}">
+                <h3 class="modal-title">Add Manager</h3>
+                <br>
+                <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+                <br>
+                <div ng-show="!document.verificado">
+                    <div class="alert alert-info" role="alert">You can verify this document as valid by clicking the button bellow</div>
+                    <button style="border:none;" class="btn-green" type="button" ng-click="verify()">Verify this document as valid</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <img class="document-modal" ng-src="{{document.url}}" alt="">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-sp-blue" type="button" ng-click="dismiss()">Close</button>
+
+            </div>
+        </script>
     </div>
 </div>
 <link rel="stylesheet" href="/modules/users/users.css">

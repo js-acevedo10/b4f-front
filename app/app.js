@@ -5,6 +5,7 @@ angular.module('b4f', [
     'ngRoute',
     'ngStorage',
     'cgBusy',
+    'ui.bootstrap',
     'b4f.login',
     'b4f.dashboard',
     'b4f.register',
@@ -37,6 +38,20 @@ angular.module('b4f', [
         
         $scope.isAdmin = function () {
             if($scope.isLogged() && $localStorage.userInfo.role == "admin") {
+                return true;
+            }
+            return false;
+        }
+        
+        $scope.isUser = function () {
+            if($scope.isLogged() && $localStorage.userInfo.role == "client") {
+                return true;
+            }
+            return false;
+        }
+        
+        $scope.isManager = function () {
+            if($scope.isLogged() && $localStorage.userInfo.role == "manager") {
                 return true;
             }
             return false;
