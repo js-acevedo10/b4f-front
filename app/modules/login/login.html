@@ -1,7 +1,7 @@
 <div class="container-fluid green contentBox">
-    <div class="col-md-6 col-md-offset-3 loginBox">
+    <div class="col-md-6 col-md-offset-3 loginBox" >
         <center><img src="/modules/login/assets/Bikes4Free.png" class="" style="width:320px; margin-top:20px; margin-bottom:20px;" /></center>
-        <form class="form" name="login">
+        <form class="form" name="login" cg-busy="{promise:loginPromise,minDuration:1000}">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="input form-control" name="username" id="username" ng-model="loginForm.username">

@@ -1,0 +1,66 @@
+.header{
+    width: 100%;
+}
+.client{
+    text-align:left;
+    overflow-x: scroll;
+}
+.clients{   
+    overflow-y: scroll;
+}
+.content{
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 75vh;
+}
+.detail-header {
+    margin-top:0;
+    word-break:break-all;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.detail {
+    width: 100%;
+    background-color: 
+}
+
+.penalties {
+    overflow-y: scroll;
+}
+
+.client-row{
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.inner-header{
+    color: #2FAC66;
+}
+
+.btn-sp-red {
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: red;
+    color: red;
+    border-radius: 5px;
+    text-align: center;
+    padding: 1vh;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.btn-sp-red:hover,
+.btn-red:active,
+.btn-red:focus {
+    border-color: tomato;
+    color: tomato;
+    cursor: pointer;
+}

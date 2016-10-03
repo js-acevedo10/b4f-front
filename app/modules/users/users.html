@@ -1,0 +1,49 @@
+<div class="container-fluid white">
+    <div class="row text-center header">
+        <h1>Users</h1></div>
+    <div class="content squareContainer row" cg-busy="{promise:loading,minDuration:1000}">
+       <h2 class="inner-header">Clients</h2>
+        <div class="col-xs-12 clients">
+            <div ng-repeat="client in clients" class="client-row">
+                <h3>{{client.name}}</h3>
+                <button  ng-click="removeClient(client.email)" class="btn btn-sp-red client">Remove client</button>
+            </div>
+        </div>
+        <h2 class="inner-header">Managers</h2>
+        <div class="col-xs-12 clients">
+            <div ng-repeat="manager in managers" class="client-row">
+                <h3>{{manager.name}}</h3>
+                <button  ng-click="removeManager(manager.email)" class="btn btn-sp-red client">Remove manager</button>
+            </div>
+        </div>
+        <h2 class="inner-header">Admins</h2>
+        <div class="col-xs-12 clients">
+<!--
+            <div ng-repeat="client in clients" class="client-row">
+                <h3>{{client.name}}</h3>
+            </div>
+-->
+        </div>
+        <!--        <div class="col-md-1 col-sm-12"></div>-->
+        <div class="col-md-6 col-sm-12 penalties" ng-show="penalties != undefined && penalties.length > 0">
+            <p class="detail-header">Penalties of {{currentUser}}</p>
+            <hr>
+            <div class="row" ng-repeat="penalty in penalties">
+                <div class="col-12">
+                    <div class="detail">Fee: {{penalty.fee}}</div>
+                </div>
+                <div class="col-12">
+                    <div class="label label-primary">Training required: {{penalty.trainingRequired?'Yes':'No'}}</div>
+                </div>
+                <div class="col-12">
+                    <div class="label" ng-class="penaltyClass(penalty.pending)">Payment pending: {{penalty.pending ? "Yes":"No"}}</div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12" ng-show="penalties.length == 0">
+            <p class="detail-header">{{currentUser}} has no penalties</p>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="/modules/users/users.css">

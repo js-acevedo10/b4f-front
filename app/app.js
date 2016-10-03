@@ -4,12 +4,14 @@
 angular.module('b4f', [
     'ngRoute',
     'ngStorage',
+    'cgBusy',
     'b4f.login',
     'b4f.dashboard',
     'b4f.register',
     'b4f.bikes',
     'b4f.retorno',
-    'b4f.penalty'
+    'b4f.penalty',
+    'b4f.users'
 ])
     .controller('NavController', ['$scope', '$localStorage', '$location', function ($scope, $localStorage, $location) {
         $scope.isLoginNav = function () {
@@ -28,6 +30,13 @@ angular.module('b4f', [
         }
         $scope.isLogged = function () {
             if($localStorage.userInfo != null && $localStorage.userInfo != undefined) {
+                return true;
+            }
+            return false;
+        }
+        
+        $scope.isAdmin = function () {
+            if($scope.isLogged() && $localStorage.userInfo.role == "admin") {
                 return true;
             }
             return false;
