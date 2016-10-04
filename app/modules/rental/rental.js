@@ -171,8 +171,8 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
                         $scope.returningBike = $http({
                             method: 'POST',
-//                            url: 'http://bikes4freeg5.herokuapp.com/rental',
-                            url: 'http://localhost:8080/rental',
+                            url: 'http://bikes4freeg5.herokuapp.com/rental',
+//                            url: 'http://localhost:8080/rental',
                             data: JSON.stringify($scope.returnInfo),
                             headers: {
                                 "Authorization": accessToken
@@ -185,7 +185,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                                 templateUrl: 'recipt.html',
                                 controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, certificate) {
 
-                                    $scope.certificate = certificate;
+                                    $scope.certificate = JSON.parse(certificate);
                                     $scope.dismiss = function () {
                                         $uibModalInstance.dismiss('cancel');
                                     };
