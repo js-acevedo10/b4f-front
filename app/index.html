@@ -28,6 +28,7 @@
         <a href="#!/bikes" ng-click="closeNav()">Bikes</a>
         <a href="#!/rentplace" ng-click="closeNav()">Venues</a>
         <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
+        <a href="#!/booking" ng-click="closeNav()" ng-if="isUser()">Booking</a>
         <a href="#!/admin/users" ng-click="closeNav()" ng-if="isAdmin()">Users</a>
         <hr>
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
@@ -52,6 +53,7 @@
     <script src="modules/register/register.js"></script>
     <script src="modules/penalty/penalty.js"></script>
     <script src="modules/users/users.js"></script>
+     <script src="modules/booking/booking.js"></script>
 
     <!--    Css libs-->
     <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">

@@ -1,0 +1,67 @@
+<div class="container-fluid white">
+    <br>
+    <center>
+        <div class="squareContainer content">
+            <div class="row" style="width:90%">
+
+                <center>
+                    <h1>Booking</h1>
+                </center>
+                <hr/>
+                <div style="height: 40vh !important; overflow: scroll;">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Bike ID</th>
+                            <th>Actions</th>
+                        </tr>
+
+                        <tr ng-repeat="bike in bikes" class="success">
+                            <td>{{bike.id}}</td>
+                           
+                            <td>
+                                <button id="{{$parent.$index}}-reserve-btn" class="btn btn-default btn-sm" ng-click="reserveBike(bike)"><span class="glyphicon glyphicon-edit"></span> Reserve</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr/>
+
+
+            <div ng-show="editMode" class="well">
+                <h3>Editing Bike</h3>
+                <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
+                    <fieldset>
+                        <input id="id" class="form-control" type="hidden" ng-model="newBike.id" />
+
+                        <div class="col-md-12">
+                            <h4>Brand</h4>
+                            <input id="name" name="name" class="form-control" type="text" ng-model="newBike.brand" required />
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-md-12">
+                            <h4>Condition</h4>
+                            <input type="radio" ng-model="newBike.damaged" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Damaged
+                            <input type="radio" ng-model="newBike.damaged" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Damaged
+                        </div>
+
+                        <div class="col-md-12">
+                            <br>
+                            <h4>Availability</h4>
+                            <input type="radio" ng-model="newBike.available" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Available
+                            <input type="radio" ng-model="newBike.available" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Available
+                        </div>
+
+                    </fieldset>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-default" ng-click="saveEditedBike()">Save Bike</button>
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+    </center>
+</div>
+<link rel="stylesheet" href="/modules/bikes/bikes.css">
