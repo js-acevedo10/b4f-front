@@ -40,6 +40,14 @@
     padding: 10px;
 }
 
+.Active{
+    color: #2FAC66;
+}
+
+.Suspended{
+    color: red;
+}
+
 .inner-header{
     color: #2FAC66;
 }

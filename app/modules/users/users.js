@@ -2,7 +2,7 @@
 
 angular.module('b4f.users', ['ngRoute', 'ngStorage'])
 
-    .config(['$routeProvider', function ($routeProvider) {
+.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/users', {
             templateUrl: 'modules/users/users.html',
             controller: 'UsersCtrl',
@@ -34,7 +34,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
         }, function errorCallback(response)  {
 
         })
-        
+
         $scope.loading = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/manager',
@@ -48,7 +48,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
         }, function errorCallback(response)  {
 
         })
-        
+
         $scope.loading = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/admin',
@@ -62,12 +62,19 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
         }, function errorCallback(response)  {
 
         })
-        
-        $scope.removeClient = function(id){
+
+        $scope.isSuspended = function (suspended) {
+            if (!suspended) {
+                return "Active";
+            }
+            return "Suspended";
+        }
+
+        $scope.removeClient = function (id) {
             $scope.loading = $http({
                 method: 'DELETE',
-                url: 'http://bikes4freeg5.herokuapp.com/client/'+id,
-//                url: 'http://localhost:8080/client/'+id,
+                url: 'http://bikes4freeg5.herokuapp.com/client/' + id,
+                //                url: 'http://localhost:8080/client/'+id,
                 headers: {
                     Authorization: auth
                 }
@@ -76,14 +83,13 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                 $route.reload();
             }, function errorCallback(response)  {
                 $scope.error = response.data;
-            }).finally(function () {                
-            });
+            }).finally(function () {});
         };
-        
-        $scope.removeManager = function(id){
+
+        $scope.removeManager = function (id) {
             $scope.loading = $http({
                 method: 'DELETE',
-                url: 'http://bikes4freeg5.herokuapp.com/manager/'+id,
+                url: 'http://bikes4freeg5.herokuapp.com/manager/' + id,
                 //        url: 'http://localhost:8080/client',
                 headers: {
                     Authorization: auth
@@ -93,10 +99,9 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                 $route.reload();
             }, function errorCallback(response)  {
                 $scope.error = response.data;
-            }).finally(function () {
-            });
+            }).finally(function () {});
         };
-        
+
         $scope.addClient = function () {
 
             var modalInstance = $uibModal.open({
@@ -104,41 +109,92 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                 templateUrl: 'add-client.html',
                 controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage) {
 
-                    $scope.okAdd = function () {
-                        var reason = document.getElementById("comment").value;
-                        if (reason != undefined && reason != null && reason != "") {
-                            $scope.mustProvideReason = false;
-                            var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
-                            $http({
-                                method: 'PUT',
-                                url: 'https://captainops-back.herokuapp.com/reservas/' + $scope.reserva._id.$oid + '/status/2',
-                                headers: {
-                                    "Authorization": accessToken
-                                }
-                            }).then(function successCallback(response) {
-                                $scope.msj = response.data;
-                                $uibModalInstance.dismiss(reserva);
-                            }, function errorCallback(response) {
-
-                                $scope.error = response.data;
-
-                            }).finally(function () {
-                                $route.reload();
-                            });
-                        } else {
-                            $scope.mustProvideReason = true;
-                        }
+                    $scope.client = {
+                        name: "",
+                        email: "",
+                        password: "",
+                        suspended: false
                     };
 
-                    $scope.cancel = function () {
+                    $scope.okAdd = function () {
+                        
+                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        $scope.addingClient = $http({
+                            method: 'POST',
+                            url: 'http://bikes4freeg5.herokuapp.com/client',
+                            data: $scope.client,
+                            headers: {
+                                "Authorization": accessToken
+                            }
+                        }).then(function successCallback(response) {
+                            $scope.succes = response.data;
+                            $uibModalInstance.dismiss();
+                        }, function errorCallback(response) {
+                            $scope.error = response.data;
+                        }).finally(function () {
+                            $route.reload();
+                        });
+
+                    };
+
+                    $scope.dismiss = function () {
                         $uibModalInstance.dismiss('cancel');
                     };
                 },
                 size: 'lg',
                 resolve: {
-                    reserva: function () {
-                        return $scope.reserva;
-                    }
+                }
+            });
+
+            modalInstance.result.then(function (reserva) {
+
+            }, function () {
+
+            });
+
+        };
+        
+        $scope.addManager = function () {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'add-manager.html',
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage) {
+
+                    $scope.manager = {
+                        name: "",
+                        email: "",
+                        password: "",
+                        suspended: false
+                    };
+
+                    $scope.okAdd = function () {
+
+                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        $scope.addingManager = $http({
+                            method: 'POST',
+                            url: 'http://bikes4freeg5.herokuapp.com/manager',
+                            data: $scope.manager,
+                            headers: {
+                                "Authorization": accessToken
+                            }
+                        }).then(function successCallback(response) {
+                            $scope.succes = response.data;
+                            $uibModalInstance.dismiss();
+                        }, function errorCallback(response) {
+                            $scope.error = response.data;
+                        }).finally(function () {
+                            $route.reload();
+                        });
+
+                    };
+
+                    $scope.dismiss = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+                },
+                size: 'lg',
+                resolve: {
                 }
             });
 
