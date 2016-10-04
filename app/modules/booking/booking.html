@@ -12,14 +12,17 @@
                     <table class="table table-striped">
                         <tr>
                             <th>Bike ID</th>
+                            <th>Available</th>
+                            <th>Reserved</th>
                             <th>Actions</th>
                         </tr>
 
                         <tr ng-repeat="bike in bikes" class="success">
                             <td>{{bike.id}}</td>
-                           
+                           <td>{{bike.reserve}}</td>
+                            <td>{{bike.available}}</td>
                             <td>
-                                <button id="{{$parent.$index}}-reserve-btn" class="btn btn-default btn-sm" ng-click="reserveBike(bike)"><span class="glyphicon glyphicon-edit"></span> Reserve</button>
+                                <button id="{{$parent.$index}}-reserve-btn" class="btn btn-default btn-sm" ng-click="reserveBike(bike)" ng-if="!bike.reserve&&bike.available"><span class="glyphicon glyphicon-edit"></span> Reserve</button>
                             </td>
                         </tr>
                     </table>
