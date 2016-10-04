@@ -2,6 +2,9 @@
     <div class="row text-center header">
         <h1>Bike Rental</h1>
     </div>
+    <div class="row text-center header">
+        <button class="btn btn-green" ng-click="returnBike()">Retrun bike</button>
+    </div>
     <div class="row text-center header" ng-show="error">
         <h1>{{error}}</h1>
     </div>
@@ -9,9 +12,8 @@
         <h1>{{succes}}</h1>
     </div>
     <div class="container-fluid white" cg-busy="{promise:loading,minDuration:1000}">
-        <div class="row text-center header">
-            <h1>Select a venue:</h1></div>
         <div class="content squareContainer row">
+           <h2>Select a venue to see bikes avilable:</h2>
             <div class="col-md-6 col-sm-12 clients">
                 <button ng-repeat="venue in venues" ng-click="searchVenueBikes(venue.id)" class="btn btn-default btn-block client">{{venue.name}} | {{venue.address}}</button>
             </div>
@@ -58,25 +60,81 @@
         </script>
     </div>
     <div>
-        <script type="text/ng-template" id="add-manager.html">
-            <div class="modal-header text-center" cg-busy="{promise:addingManager,minDuration:1000}">
-                <h3 class="modal-title">Add Manager</h3>
+        <script type="text/ng-template" id="return-bike.html">
+            <div class="modal-header text-center" >
+                <h3 class="modal-title">Return bike</h3>
                 <br>
                 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
                 <br>
             </div>
-            <form ng-submit="okAdd()">
+            <form ng-submit="okReturn()" cg-busy="{promise:returningBike,minDuration:1000}">
                 <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="manager.name" required>
+                    <select class="form-control" ng-options='venue.id as venue.name for venue in venues' ng-model='returnInfo.returnPoint' ng-change="">
+                        <option value="" disabled selected>Select return point</option>
+                    </select>
                     <br>
-                    <input type="mail" class="form-control" placeholder="Mail" ng-model="manager.email" required>
+                    <select class="form-control" ng-options='rental.id as (rental.bike.brand +" | "+ rental.client.name) for rental in rentals' ng-model='returnInfo.rental' ng-change="">
+                        <option value="" disabled selected>Select bike to return</option>
+                    </select>
                     <br>
-                    <input type="password" class="form-control" placeholder="Password" ng-model="manager.password" required>
+                    <input type="mail" class="form-control" placeholder="Mail of client returning bike" ng-model="returnInfo.mail" required>
+                    <br>
+                    <h3>Report damages:</h3>
+                    <label><input type="checkbox" ng-model="returnInfo.pedals"> Pedals</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.saddle"> Saddle</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.handlebars"> Handlebars</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.brakes"> Brakes</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.shifter"> Shifter</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.frontGrid"> Front Grid</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.backGrid"> Back Grid</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.reflective"> Reflective</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.plate"> Plate</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.bikeBacking"> Bike Backing</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.frontFender"> Front Fender</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.backFender"> Back Fender</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.frame"> Frame</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.octopus"> Octopus</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.handle"> Handle</label>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-sp-red" type="button" ng-click="dismiss()">Close</button>
+                    <button type="submit" class="btn-sp-blue" type="submit">Return bike</button>
+                </div>
+            </form>
+        </script>
+    </div>
+    <div>
+        <script type="text/ng-template" id="recipt.html">
+            <div class="modal-header text-center" cg-busy="{promise:rentingBike,minDuration:1000}">
+                <h3 class="modal-title">Certificate</h3>
+                <br>
+                <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+                <br>
+            </div>
+            <form ng-submit="okRent()">
+                <div class="modal-body">
+                    <h4>Fee: {{certificate.Fee}}</h4>
+                    <br>
+                    <h4>Penalized: {{certificate.Penalized}}</h4>
 
                 </div>
                 <div class="modal-footer">
                     <button class="btn-sp-red" type="button" ng-click="dismiss()">Close</button>
-                    <button type="submit" class="btn-sp-blue" type="submit">Register Manager</button>
+                    <button type="submit" class="btn-sp-blue" type="submit">Rent Bike</button>
                 </div>
             </form>
         </script>

@@ -122,33 +122,82 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
         };
 
-        $scope.addManager = function () {
+        $scope.returnBike = function () {
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'add-manager.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage) {
+                templateUrl: 'return-bike.html',
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, venues) {
+                    
+                
+                    var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                    
+                    $scope.venues = venues;
+                    $scope.returningBike = $http({
+                        method: 'GET',
+                        url: 'http://bikes4freeg5.herokuapp.com/rental',
+                        headers: {
+                            "Authorization": accessToken
+                        }
+                    }).then(function successCallback(response) {
+                        $scope.rentals = response.data;
+                    }, function errorCallback(response) {
+                        $scope.error = response.data;
+                    }).finally(function () {
+                    });
+                    
+                    $scope.returnInfo = {rental:"",
+                                         returnPoint:"",
+                                         mail:"",
+                                         pedals:false,
+                                         saddle:false,
+                                         handlebars:false,
+                                         brakes:false,
+                                         shifter:false,
+                                         holder:false,
+                                         frontGrid:false,
+                                         backGrid:false,
+                                         reflective:false,
+                                         plate:false,
+                                         bikeBacking:false,
+                                         frontFender:false,
+                                         backFender:false,
+                                         frame:false,
+                                         octopus:false,
+                                         handle:false
+                                        };
+                    
+                    $scope.okReturn = function () {
 
-                    $scope.manager = {
-                        name: "",
-                        email: "",
-                        password: "",
-                        suspended: false
-                    };
-
-                    $scope.okAdd = function () {
-
-                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
-                        $scope.addingManager = $http({
+                        $scope.returningBike = $http({
                             method: 'POST',
-                            url: 'http://bikes4freeg5.herokuapp.com/manager',
-                            data: $scope.manager,
+//                            url: 'http://bikes4freeg5.herokuapp.com/rental',
+                            url: 'http://localhost:8080/rental',
+                            data: JSON.stringify($scope.returnInfo),
                             headers: {
                                 "Authorization": accessToken
                             }
                         }).then(function successCallback(response) {
-                            $scope.succes = response.data;
+                            $scope.certificate = response.data;
                             $uibModalInstance.dismiss();
+                            var modalInstance2 = $uibModal.open({
+                                animation: true,
+                                templateUrl: 'recipt.html',
+                                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, certificate) {
+
+                                    $scope.certificate = certificate;
+                                    $scope.dismiss = function () {
+                                        $uibModalInstance.dismiss('cancel');
+                                    };
+                                },
+                                size: 'lg',
+                                resolve: {
+                                    certificate: function () {
+                                        return $scope.certificate;
+                                    }
+                                }
+
+                            });
                         }, function errorCallback(response) {
                             $scope.error = response.data;
                         }).finally(function () {
@@ -163,7 +212,14 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                 },
                 size: 'lg',
                 resolve: {
+                    venues: function () {
+                        return $scope.venues;
+                    },
+                    venueS: function () {
+                        return $scope.currentVenue;
+                    }
                 }
+                
             });
 
             modalInstance.result.then(function (reserva) {
