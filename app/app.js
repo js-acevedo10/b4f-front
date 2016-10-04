@@ -13,7 +13,8 @@ angular.module('b4f', [
     'b4f.retorno',
     'b4f.penalty',
     'b4f.users',
-    'b4f.booking'
+    'b4f.booking',
+    'b4f.rental'
 ])
     .controller('NavController', ['$scope', '$localStorage', '$location', function ($scope, $localStorage, $location) {
         $scope.isLoginNav = function () {

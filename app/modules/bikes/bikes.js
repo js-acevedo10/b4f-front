@@ -24,7 +24,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.fetchBikes = function () {
         $http({
             method: 'GET',
-            //        url: 'http://bikes4freeg5.herokuapp.com/bikes',
+            //            url: 'http://bikes4freeg5.herokuapp.com/bikes',
             url: 'http://localhost:8080/bikes',
             headers: {
                 Authorization: auth
@@ -38,11 +38,24 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     }
     $scope.fetchBikes();
 
+    $http({
+        method: 'GET',
+                url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
+//        url: 'http://localhost:8080/rentplace/',
+        headers: {
+            Authorization: auth
+        }
+    }).then(function successCallback(response) {
+        $scope.venues = response.data;
+    }, function errorCallback(response)  {
+        $scope.error = response.data;
+    })
+
     $scope.fetchBikeTypes = function () {
         $http({
             method: 'GET',
-//            url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
-                    url: 'http://localhost:8080/bikeTypes',
+            //            url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
+            url: 'http://localhost:8080/bikeTypes',
             headers: {
                 Authorization: auth
             }
@@ -81,7 +94,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                         data: JSON.stringify($scope.newType)
                     }).then(function successCallback(response) {
                         $scope.bikeTypes = response.data;
-                        $scope.type = $scope.bikeTypes[$scope.bikeTypes.length - 1];
+                        $scope.selectedType = $scope.bikeTypes[$scope.bikeTypes.length - 1];
                         $scope.newType = undefined;
                         $scope.customType = false;
                     }, function errorCallback(response)  {
@@ -122,10 +135,13 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         })
     }
     $scope.saveBike = function () {
+
+        //        $scope.newBike.history = [$scope.selectedVenue];
+        //        $scope.newBike.bikeType = $scope.selectedType;
         $http({
             method: 'POST',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.type.id,
-            //            url: 'http://localhost:8080/bikes/'+$scope.type.Id,
+            //            url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.type.id,
+            url: 'http://localhost:8080/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
             headers: {
                 Authorization: auth
             },

@@ -30,6 +30,8 @@
         <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
         <a href="#!/booking" ng-click="closeNav()" ng-if="isUser()">Booking</a>
         <a href="#!/admin/users" ng-click="closeNav()" ng-if="isAdmin()">Users</a>
+        <a href="#!/rental" ng-click="closeNav()" ng-if="isManager()">Bike Rental</a>
+        <a href="#!/return" ng-click="closeNav()" ng-if="isManager()">Bike Return</a>
         <hr>
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
     </div>
@@ -50,14 +52,15 @@
     <script src="modules/dashboard/dashboard.js"></script>
     <script src="modules/bikes/bikes.js"></script>
     <script src="modules/retorno/retorno.js"></script>
-    <script src="modules/register/register.js"></script>
     <script src="modules/penalty/penalty.js"></script>
+    <script src="modules/register/register.js"></script>
     <script src="modules/users/users.js"></script>
-     <script src="modules/booking/booking.js"></script>
+    <script src="modules/booking/booking.js"></script>
+    <script src="modules/rental/rental.js"></script>
 
     <!--    Css libs-->
     <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">
-<!--    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">-->
+    <!--    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">-->
 </body>
 
 </html>
