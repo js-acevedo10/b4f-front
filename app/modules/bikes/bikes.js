@@ -24,8 +24,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.fetchBikes = function () {
         $http({
             method: 'GET',
-            //            url: 'http://bikes4freeg5.herokuapp.com/bikes',
-            url: 'http://localhost:8080/bikes',
+            url: 'http://bikes4freeg5.herokuapp.com/bikes',
+            //            url: 'http://localhost:8080/bikes',
             headers: {
                 Authorization: auth
             }
@@ -40,8 +40,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
 
     $http({
         method: 'GET',
-                url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
-//        url: 'http://localhost:8080/rentplace/',
+        url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
+        //        url: 'http://localhost:8080/rentplace/',
         headers: {
             Authorization: auth
         }
@@ -54,8 +54,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.fetchBikeTypes = function () {
         $http({
             method: 'GET',
-            //            url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
-            url: 'http://localhost:8080/bikeTypes',
+            url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
+            //            url: 'http://localhost:8080/bikeTypes',
             headers: {
                 Authorization: auth
             }
@@ -140,8 +140,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         //        $scope.newBike.bikeType = $scope.selectedType;
         $http({
             method: 'POST',
-            //            url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.type.id,
-            url: 'http://localhost:8080/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
+            //            url: 'http://localhost:8080/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
             headers: {
                 Authorization: auth
             },
