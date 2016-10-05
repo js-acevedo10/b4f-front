@@ -116,7 +116,6 @@ body {
 #main {
     transition: margin-left .5s;
     transition: background-color .5s;
-=======
 }
 
 #hm {
@@ -161,4 +160,6 @@ body {
 }
 
 .errorMessage {
+    font-size: 15px;
+    color: orangered;
 }
