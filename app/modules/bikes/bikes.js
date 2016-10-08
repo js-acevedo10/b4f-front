@@ -24,8 +24,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $scope.fetchBikes = function () {
         $http({
             method: 'GET',
-                    url: 'http://bikes4freeg5.herokuapp.com/bikes',
-//            url: 'http://localhost:8080/bikes',
+            url: 'http://bikes4freeg5.herokuapp.com/bikes',
+//           url: 'http://localhost:8080/bikes',
 
             headers: {
                 Authorization: auth
@@ -57,7 +57,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
 //                    url: 'http://localhost:8080/bikeTypes',
-
             headers: {
                 Authorization: auth
             }
@@ -69,9 +68,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
 
     }
     $scope.fetchBikeTypes();
-
-
-
+    
     $scope.addBike = function () {
         $scope.addingBike = true;
         $scope.newBike = {
@@ -130,7 +127,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             console.log($scope.newBike);
             $scope.editMode = true;
             return response;
-
         }, function errorCallback(response)  {
             console.log("error finding one bike: ");
             console.log(response);

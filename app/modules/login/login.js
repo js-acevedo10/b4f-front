@@ -26,6 +26,7 @@ angular.module('b4f.login', ['ngRoute', 'ngStorage'])
                 $location.path("/dashboard");
             }, function errorCallback(response) {
                 console.error(response.data);
+                $scope.loginError = "Please check your credentials";
             });
         }
 }]);

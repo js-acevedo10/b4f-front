@@ -115,10 +115,7 @@ body {
 
 #main {
     transition: margin-left .5s;
-<<<<<<< Updated upstream
     transition: background-color .5s;
-=======
->>>>>>> Stashed changes
 }
 
 #hm {
@@ -155,14 +152,14 @@ body {
 }
 
 .row {
-<<<<<<< Updated upstream
     margin: 0;   
 }
 
 .container-fluid {
     transition: background-color .5s;
 }
-=======
-    margin: 0;
+
+.errorMessage {
+    font-size: 15px;
+    color: orangered;
 }
->>>>>>> Stashed changes

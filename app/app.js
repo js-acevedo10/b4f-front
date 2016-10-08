@@ -5,6 +5,7 @@ angular.module('b4f', [
     'ngRoute',
     'ngStorage',
     'cgBusy',
+    'ngMessages',
     'ui.bootstrap',
     'b4f.login',
     'b4f.dashboard',
