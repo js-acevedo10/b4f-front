@@ -70,26 +70,29 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             return "Suspended";
         }
 
-        $scope.removeClient = function (id) {
+        $scope.removeClient = function (client) {
             $scope.loading = $http({
                 method: 'DELETE',
-                url: 'http://bikes4freeg5.herokuapp.com/client/' + id,
-                //                url: 'http://localhost:8080/client/'+id,
+                url: 'http://bikes4freeg5.herokuapp.com/client/' + client.id,
+                //                url: 'http://localhost:8080/client/'+ client.id,
                 headers: {
                     Authorization: auth
                 }
             }).then(function successCallback(response) {
-                $scope.succes = response.data;
-                $route.reload();
+                $scope.succes = JSON.parse(response.data);
+                var index = $scope.clients.indexOf(client);
+                if (index > -1) {
+                    $scope.clients.splice(index, 1);
+                }
             }, function errorCallback(response)  {
                 $scope.error = response.data;
             }).finally(function () {});
         };
 
-        $scope.removeManager = function (id) {
+        $scope.removeManager = function (manager) {
             $scope.loading = $http({
                 method: 'DELETE',
-                url: 'http://bikes4freeg5.herokuapp.com/manager/' + id,
+                url: 'http://bikes4freeg5.herokuapp.com/manager/' + manager.id,
                 //        url: 'http://localhost:8080/client',
                 headers: {
                     Authorization: auth

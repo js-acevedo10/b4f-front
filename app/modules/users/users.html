@@ -2,11 +2,11 @@
     <div class="row text-center header">
         <h1>Users</h1>
     </div>
-    <div class="row text-center header" ng-show="error">
+    <div class="row text-center header error" ng-show="error">
         <h1>{{error}}</h1>
     </div>
-    <div class="row text-center header" ng-show="succes">
-        <h1>{{succes}}</h1>
+    <div class="row text-center header succes" ng-show="succes">
+        <h1>{{succes.Succes}}</h1>
     </div>
     <div class="content squareContainer row" cg-busy="{promise:loading,minDuration:1000}">
         <h2 class="inner-header">Clients</h2>
@@ -16,7 +16,7 @@
                 <h3>{{client.name}}</h3>
                 <p ng-class="isSuspended(client.suspended)">{{isSuspended(client.suspended)}}</p>
                 <h5>BikePoints: {{client.points}}</h5>
-                <button ng-click="removeClient(client.id)" class="btn btn-sp-red client">Remove client</button>
+                <button ng-click="removeClient(client)" class="btn btn-sp-red client">Remove client</button>
             </div>
         </div>
         <h2 class="inner-header">Managers</h2>
@@ -24,7 +24,7 @@
         <div class="col-xs-12 clients">
             <div ng-repeat="manager in managers" class="client-row">
                 <h3>{{manager.name}}</h3>
-                <button ng-click="removeManager(manager.id)" class="btn btn-sp-red client">Remove manager</button>
+                <button ng-click="removeManager(manager)" class="btn btn-sp-red client">Remove manager</button>
             </div>
         </div>
         <h2 class="inner-header">Admins</h2>

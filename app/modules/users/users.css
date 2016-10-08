@@ -52,6 +52,14 @@
     color: #2FAC66;
 }
 
+.succes{
+    color: #2FAC66;
+}
+
+.error{
+    color: red;
+}
+
 .btn-sp-red {
     background-color: transparent;
     border-style: solid;
