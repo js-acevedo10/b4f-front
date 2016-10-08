@@ -138,8 +138,9 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
     $scope.reserveBike = function (bike) {
         
          $http({
-            method: 'GET',
+            method: 'PUT',
             url: 'http://bikes4freeg5.herokuapp.com/bikes/reserve',
+//            url: 'http://localhost:8080/bikes/reserve',
             headers: {
                 Authorization: auth
             },
