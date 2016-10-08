@@ -1,14 +1,13 @@
 <div class="container-fluid white">
     <br>
     <center>
-        <div class="squareContainer content">
-            <div class="row" style="width:90%">
-
+        <div class="squareContainer content" cg-busy="{promise:venuesPromise,minDuration:1000}">
+            <div class="row" style="width:90%" ng-hide="editMode || addingPlace">
                 <center>
                     <h1>Venues</h1>
                 </center>
                 <hr/>
-                <div style="height: 35vh !important; overflow: scroll;">
+                <div style="height: 55vh !important; overflow: scroll;">
                     <table class="table table-striped">
                         <tr>
                             <th>Venue ID</th>
@@ -16,8 +15,7 @@
                             <th>Address</th>
                             <th>Storing Capacity</th>
                             <th>Bikes</th>
-                            <th>
-                                Actions</th>
+                            <th>Actions</th>
                         </tr>
 
                         <tr ng-repeat="place in places" class="success">
@@ -25,7 +23,11 @@
                             <td>{{place.name}}</td>
                             <td>{{place.address}}</td>
                             <td>{{place.storingCapacity}}</td>
-                            <td><p ng-repeat="bike in place.bikes">{{bike.id}}</p></td>
+                            <td>
+                                <a href="#!/bikes" ng-repeat="bike in place.bikes" ng-if="!bike.deleted">
+                                    <p>{{bike.id}}</p>
+                                </a>
+                            </td>
                             <td>
                                 <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm btn-block" ng-click="editPlace(place)">Edit</button>
                                 <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm btn-block" ng-click="deletePlace(place)">Remove</button>
@@ -59,23 +61,32 @@
                     </div>
                 </form>
             </div>
-            <button class="btn btn-default" ng-click="addPlace()">Add new Venue</button>
-
-            <div class="row" ng-show="addingPlace" style="width:90%">
+            <button class="btn btn-default" ng-click="addPlace()" ng-if="!addingPlace">Add new Venue</button>
+            <div class="col-md-4 col-md-offset-4" ng-show="addingPlace">
+                <h1>Add a new Venue</h1>
                 <hr/>
-                <div class="form-group">
-                    <h4>Address</h4>
-                    <input id="address" type="text" class="input form-control" ng-model="newPlace.address">
-                </div>
-                <div class="form-group">
-                    <h4>Name</h4>
-                    <input id="name" type="text" class="input form-control" ng-model="newPlace.name">
-                </div>
-
-                <div class="row">
-                    <button class="btn btn-default" ng-click="savePlace()">Add Venue</button>
-                    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-                </div>
+                <form name="newVenue">
+                    <div class="form-group">
+                        <h4>Venue Address</h4>
+                        <input id="address" name="addr" type="text" class="input form-control" ng-model="newPlace.address" placeholder="Venue Address" required ng-maxlength="30">
+                        <div ng-messages="newVenue.addr.$error" role="alert" class="errorMessage" ng-if="newVenue.addr.$dirty">
+                            <div ng-message="required">Venue address is required.</div>
+                            <div ng-message="maxlength">Venue address is too long.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4>Venue Name</h4>
+                        <input id="name" name="name" type="text" class="input form-control" ng-model="newPlace.name" placeholder="Venue Name" required ng-maxlength="30">
+                        <div ng-messages="newVenue.name.$error" role="alert" class="errorMessage" ng-if="newVenue.name.$dirty">
+                            <div ng-message="required">Venue name is required.</div>
+                            <div ng-message="maxlength">Venue name is too long.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-default" ng-click="newVenue.$valid && savePlace()">Add Venue</button>
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                    </div>
+                </form>
                 <hr/>
             </div>
 

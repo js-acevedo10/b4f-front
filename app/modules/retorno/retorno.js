@@ -20,7 +20,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
     $scope.editMode = false;
     $scope.editPlace = function (place) {
         console.log(place);
-        $http({
+        $scope.venuesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace/' + place.id,
             headers: {
@@ -43,7 +43,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
 
 
     $scope.fetchPlaces = function () {
-        $http({
+        $scope.venuesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
             headers: {
@@ -75,7 +75,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
     }
 
     $scope.savePlace = function () {
-        $http({
+        $scope.venuesPromise = $http({
             method: 'POST',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace',
             headers: {
@@ -94,7 +94,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
         });
     }
     $scope.saveEditedPlace = function () {
-        $http({
+        $scope.venuesPromise = $http({
             method: 'PUT',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace/' + $scope.newPlace.id,
             headers: {
@@ -113,8 +113,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
         });
     }
     $scope.deletePlace = function (place) {
-
-        $http({
+        $scope.venuesPromise = $http({
             method: 'DELETE',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace/' + place.id,
             headers: {
@@ -130,7 +129,5 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             console.log("error deleting one place: ");
             console.log(response);
         })
-
     };
-
 }]);
