@@ -56,6 +56,19 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
     $scope.fetchBikeTypes();
 
 
+    $http({
+        method: 'GET',
+        url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
+        //        url: 'http://localhost:8080/rentplace/',
+        headers: {
+            Authorization: auth
+        }
+    }).then(function successCallback(response) {
+        $scope.venues = response.data;
+    }, function errorCallback(response)  {
+        $scope.error = response.data;
+    })
+    
 
     $scope.addBike = function () {
         $scope.addingBike = true;
