@@ -19,40 +19,79 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
 .controller('PenaltyCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
 
     var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
-
-    $http({
-        method: 'GET',
-        url: 'http://bikes4freeg5.herokuapp.com/client',
-        //        url: 'http://localhost:8080/client',
-        headers: {
-            Authorization: auth
-        }
-    }).then(function successCallback(response) {
-        $scope.clients = response.data;
-        console.log(response.data);
-    }, function errorCallback(response)  {
-
-    })
-    $scope.penaltyClass = function (pending) {
-        return pending ? 'label-danger' : 'label-success';
-    }
-    $scope.searchClientPenalties = function (userId) {
-        $scope.penalties = [];
-        
+    var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.role : undefined;
+    var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.id : undefined;
+    
+    if (role == "client"){
         $http({
             method: 'GET',
-            url: 'http://bikes4freeg5.herokuapp.com/penalty/' + userId,
-            //        url: 'http://localhost:8080/penalty/'+userId,
+            url: 'http://bikes4freeg5.herokuapp.com/client/'+id,
+            //        url: 'http://localhost:8080/client',
             headers: {
                 Authorization: auth
             }
         }).then(function successCallback(response) {
-            $scope.penalties = response.data;
+            $scope.clients = [response.data];
+            console.log(response.data);
         }, function errorCallback(response)  {
 
         })
-        
-        $scope.currentUser = userId;
+        $scope.penaltyClass = function (pending) {
+            return pending ? 'label-danger' : 'label-success';
+        }
+        $scope.searchClientPenalties = function (userId) {
+            $scope.penalties = [];
+
+            $http({
+                method: 'GET',
+                url: 'http://bikes4freeg5.herokuapp.com/penalty/' + userId,
+                //        url: 'http://localhost:8080/penalty/'+userId,
+                headers: {
+                    Authorization: auth
+                }
+            }).then(function successCallback(response) {
+                $scope.penalties = response.data;
+            }, function errorCallback(response)  {
+
+            })
+
+            $scope.currentUser = userId;
+        }
+    }else{
+        $http({
+            method: 'GET',
+            url: 'http://bikes4freeg5.herokuapp.com/client',
+            //        url: 'http://localhost:8080/client',
+            headers: {
+                Authorization: auth
+            }
+        }).then(function successCallback(response) {
+            $scope.clients = response.data;
+            console.log(response.data);
+        }, function errorCallback(response)  {
+
+        })
+        $scope.penaltyClass = function (pending) {
+            return pending ? 'label-danger' : 'label-success';
+        }
+        $scope.searchClientPenalties = function (userId) {
+            $scope.penalties = [];
+
+            $http({
+                method: 'GET',
+                url: 'http://bikes4freeg5.herokuapp.com/penalty/' + userId,
+                //        url: 'http://localhost:8080/penalty/'+userId,
+                headers: {
+                    Authorization: auth
+                }
+            }).then(function successCallback(response) {
+                $scope.penalties = response.data;
+            }, function errorCallback(response)  {
+
+            })
+
+            $scope.currentUser = userId;
+        }
     }
 
 
