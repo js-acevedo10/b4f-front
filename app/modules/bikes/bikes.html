@@ -1,9 +1,8 @@
 <div class="container-fluid white">
     <br>
     <center>
-        <div class="squareContainer content">
+        <div class="squareContainer content" cg-busy="{promise:bikesPromise,minDuration:1000}">
             <div class="row" style="width:90%">
-
                 <center>
                     <h1>Bikes</h1>
                 </center>
@@ -18,7 +17,6 @@
                             <th>BikeType</th>
                             <th>Actions</th>
                         </tr>
-
                         <tr ng-repeat="bike in bikes" class="success">
                             <td>{{bike.id}}</td>
                             <td>{{bike.brand}}</td>
@@ -34,17 +32,18 @@
                 </div>
             </div>
             <hr/>
-
-
             <div ng-show="editMode" class="well">
                 <h3>Editing Bike</h3>
                 <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
                     <fieldset>
                         <input id="id" class="form-control" type="hidden" ng-model="newBike.id" />
-
                         <div class="col-md-12">
                             <h4>Brand</h4>
                             <input id="name" name="name" class="form-control" type="text" ng-model="newBike.brand" required />
+                            <div ng-messages="form.name.$error" role="alert" class="errorMessage" ng-if="form.name.$dirty">
+                                <div ng-message="required">Brand name is required.</div>
+                                <div ng-message="email">Please enter a valid brand name.</div>
+                            </div>
                         </div>
                         <br>
                         <br>
@@ -53,14 +52,12 @@
                             <input type="radio" ng-model="newBike.damaged" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Damaged
                             <input type="radio" ng-model="newBike.damaged" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Damaged
                         </div>
-
                         <div class="col-md-12">
                             <br>
                             <h4>Availability</h4>
                             <input type="radio" ng-model="newBike.available" ng-value="false" ng-change="nuevoServicio=null;serviceError=null;"> Not Available
                             <input type="radio" ng-model="newBike.available" ng-value="true" ng-change="nuevoServicio=null;serviceError=null;"> Available
                         </div>
-
                     </fieldset>
                     <br>
                     <div class="row">
@@ -69,10 +66,8 @@
                     </div>
                 </form>
             </div>
-
             <button class="btn btn-default" ng-click="addBike()">Add new Bike</button>
             <div class="row" ng-show="addingBike">
-
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
                         <h4>Brand</h4>
@@ -84,27 +79,21 @@
                         <br>
                     </div>
                 </div>
-
                 <div class="col-md-12">
                     <br>
                     <h4>BikeType</h4>
-                    <input type="radio" ng-model="customType" value="false" ng-change="nuevoServicio=null;serviceError=null;"> Existing BikeType
+                    <input type="radio" ng-model="customType" value="false" checked ng-change="nuevoServicio=null;serviceError=null;"> Existing BikeType
 
                     <input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;"> Create BikeType
-
                 </div>
-
                 <div class="col-md-8 col-md-offset-2" ng-show="customType == 'false'">
-
                     <hr/>
                     <select class="form-control" ng-options='type as type.name for type in bikeTypes' ng-model='selectedType' ng-change="typeError=null;">
                         <option value="" disabled selected>Select the type for this bike</option>
                     </select>
                     <hr/>
-
                 </div>
                 <div class="col-md-8 col-md-offset-2" ng-show="customType == 'true'">
-
                     <hr/>
                     <h5>Type Name</h5>
                     <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name">
@@ -113,17 +102,13 @@
                     <br>
                     <div ng-click="saveType()" class="btn btn-default" ng-disabled="addingType">Save Bike type</div>
                     <hr/>
-
                 </div>
-
                 <div class="col-md-12">
                     <button class="btn btn-default" ng-click="saveBike()">Save Bike</button>
                     <button class="btn btn-default" ng-click="cancel()">Cancel</button>
                 </div>
             </div>
-
             <hr/>
-
         </div>
     </center>
 </div>

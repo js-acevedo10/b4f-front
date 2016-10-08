@@ -14,18 +14,17 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             }]
         }
     });
-    }])
-
+}])
 .controller('BikesCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
 
     var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
 
     $scope.editMode = false;
     $scope.fetchBikes = function () {
-        $http({
+        $scope.bikesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/bikes',
-//           url: 'http://localhost:8080/bikes',
+//          url: 'http://localhost:8080/bikes',
 
             headers: {
                 Authorization: auth
@@ -42,7 +41,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     $http({
         method: 'GET',
         url: 'http://bikes4freeg5.herokuapp.com/rentplace/',
-        //        url: 'http://localhost:8080/rentplace/',
+//      url: 'http://localhost:8080/rentplace/',
         headers: {
             Authorization: auth
         }
@@ -53,10 +52,10 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     })
 
     $scope.fetchBikeTypes = function () {
-        $http({
+        $scope.bikesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
-//                    url: 'http://localhost:8080/bikeTypes',
+//          url: 'http://localhost:8080/bikeTypes',
             headers: {
                 Authorization: auth
             }
@@ -83,7 +82,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         if ($scope.newType != undefined) {
             if ($scope.newType.name != undefined && $scope.newType.name != '' && $scope.newType.capacity != undefined && $scope.newType.capacity != '') {
                 if ($scope.customType) {
-                    $http({
+                    $scope.bikesPromise = $http({
                         method: 'POST',
                         url: 'http://bikes4freeg5.herokuapp.com/bikeTypes',
                         //                        url: 'http://localhost:8080/bikeTypes',
@@ -116,7 +115,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         $scope.editMode = false;
     }
     $scope.editBike = function (bike) {
-        $http({
+        $scope.bikesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/bikes/' + bike.id,
             headers: {
@@ -134,14 +133,13 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
     }
     $scope.saveBike = function () {
 
-        //        $scope.newBike.history = [$scope.selectedVenue];
-        //        $scope.newBike.bikeType = $scope.selectedType;
-        $http({
+        //$scope.newBike.history = [$scope.selectedVenue];
+        //$scope.newBike.bikeType = $scope.selectedType;
+        $scope.bikesPromise = $http({
             method: 'POST',
-
             url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
-            //            url: 'http://localhost:8080/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
-    headers: {
+            //url: 'http://localhost:8080/bikes/' + $scope.selectedType.id + '/' + $scope.selectedVenue.id,
+            headers: {
                 Authorization: auth
             },
             data: JSON.stringify($scope.newBike)
@@ -158,7 +156,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         });
     }
     $scope.saveEditedBike = function () {
-        $http({
+        $scope.bikesPromise = $http({
             method: 'PUT',
             url: 'http://bikes4freeg5.herokuapp.com/bikes/' + $scope.newBike.id,
             //            url: 'http://localhost:8080/bikes/'+$scope.type.Id,
@@ -169,7 +167,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         }).then(function successCallback(response) {
             $scope.bikes = response.data;
         }, function errorCallback(response)  {
-
+            
         }).finally(function () {
             $scope.addingBike = false;
             $scope.newBike = undefined;
@@ -179,8 +177,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         });
     }
     $scope.deleteBike = function (bike) {
-
-        $http({
+        $scope.bikesPromise = $http({
             method: 'DELETE',
             url: 'http://bikes4freeg5.herokuapp.com/bikes/' + bike.id,
             headers: {
@@ -191,12 +188,9 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             $scope.editMode = false;
             $scope.fetchPlaces();
             return response;
-
         }, function errorCallback(response)  {
             console.log("error deleting one place: ");
             console.log(response);
         })
-
     };
-
-    }]);
+}]);

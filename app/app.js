@@ -7,6 +7,7 @@ angular.module('b4f', [
     'cgBusy',
     'ngMessages',
     'ui.bootstrap',
+    'angular.filter',
     'b4f.login',
     'b4f.dashboard',
     'b4f.register',
