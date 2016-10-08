@@ -44,9 +44,9 @@
             </div>
             <form ng-submit="okAdd()">
                 <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="client.name" required>
+                    <input type="text" class="form-control" placeholder="Name" ng-model="client.name" maxlength="50" required>
                     <br>
-                    <input type="mail" class="form-control" placeholder="Mail" ng-model="client.email" required>
+                    <input type="mail" class="form-control" placeholder="Mail" ng-model="client.email" maxlength="50" required>
                     <br>
                     <input type="password" class="form-control" placeholder="Password" ng-model="client.password" required>
 
@@ -68,9 +68,9 @@
             </div>
             <form ng-submit="okAdd()">
                 <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="manager.name" required>
+                    <input type="text" class="form-control" placeholder="Name" ng-model="manager.name" maxlength="50" required>
                     <br>
-                    <input type="mail" class="form-control" placeholder="Mail" ng-model="manager.email" required>
+                    <input type="mail" class="form-control" placeholder="Mail" ng-model="manager.email" maxlength="50" required>
                     <br>
                     <input type="password" class="form-control" placeholder="Password" ng-model="manager.password" required>
 

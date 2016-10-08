@@ -25,8 +25,8 @@
     <div id="mySidenav" class="sidenav" ng-if="isLogged()">
         <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
         <a href="#!/dashboard" ng-click="closeNav()">Dashboard</a>
-        <a href="#!/bikes" ng-click="closeNav()">Bikes</a>
-        <a href="#!/rentplace" ng-click="closeNav()">Venues</a>
+        <a href="#!/bikes" ng-click="closeNav()" ng-if="isAdmin() || isManager()">Bikes</a>
+        <a href="#!/rentplace" ng-click="closeNav()" ng-if="isAdmin() || isManager()">Venues</a>
         <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
         <a href="#!/booking" ng-click="closeNav()" ng-if="isUser()">Booking</a>
         <a href="#!/admin/users" ng-click="closeNav()" ng-if="isAdmin()">Users</a>
