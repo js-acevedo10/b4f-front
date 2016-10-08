@@ -2,7 +2,7 @@
     <br>
     <center>
         <div class="squareContainer content" cg-busy="{promise:bikesPromise,minDuration:1000}">
-            <div class="row" style="width:90%">
+            <div class="row" style="width:90%" ng-hide="addingBike || editMode">
                 <center>
                     <h1>Bikes</h1>
                 </center>
@@ -22,17 +22,17 @@
                             <td>{{bike.brand}}</td>
                             <td>{{bike.damaged}}</td>
                             <td>{{bike.available}}</td>
-                            <td>{{bike.bikeType}}</td>
+                            <td>{{bike.bikeType.name}}</td>
                             <td>
-                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)">Edit</button>
+                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)">Remove</button>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <hr/>
-            <div ng-show="editMode" class="well">
+            <div ng-show="editMode && !addingBike" class="well">
                 <h3>Editing Bike</h3>
                 <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
                     <fieldset>
@@ -66,47 +66,83 @@
                     </div>
                 </form>
             </div>
-            <button class="btn btn-default" ng-click="addBike()">Add new Bike</button>
+            <button class="btn btn-default" ng-click="addBike()" ng-show="!addingBike && !editMode">Add new Bike</button>
             <div class="row" ng-show="addingBike">
-                <div class="form-group">
+               <h1>Add new Bike</h1>
+                <br>
+                <form name="newBikeForm">
                     <div class="col-md-4 col-md-offset-4">
-                        <h4>Brand</h4>
-                        <input id="brand" class="form-control" type="text" ng-model="newBike.brand" required/>
-                        <h5>Bike Venue</h5>
-                        <select class="form-control" ng-options='venue as venue.name for venue in venues' ng-model='selectedVenue' ng-change="typeError=null;">
-                            <option value="" disabled selected>Select the venue for this bike</option>
-                        </select>
-                        <br>
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <input id="brand" name="brand" class="form-control" type="text" ng-model="newBike.brand" required ng-maxlength="20" />
+                            <div ng-messages="newBikeForm.brand.$error" role="alert" class="errorMessage" ng-if="newBikeForm.brand.$dirty">
+                                <div ng-message="required">Brand name is required.</div>
+                                <div ng-message="maxlength">Brand name is too long.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="venue">Bike Venue</label>
+                            <select name="venue" class="form-control" ng-options='venue as venue.name for venue in venues' ng-model='selectedVenue' ng-change="typeError=null;" required>
+                                <option value="" disabled selected>Select the venue for this bike</option>
+                            </select>
+                            <div ng-messages="newBikeForm.venue.$error" role="alert" class="errorMessage" ng-if="newBikeForm.venue.$dirty">
+                                <div ng-message="required">Brand name is required.</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <br>
-                    <h4>BikeType</h4>
-                    <input type="radio" ng-model="customType" value="false" checked ng-change="nuevoServicio=null;serviceError=null;"> Existing BikeType
-
-                    <input type="radio" ng-model="customType" value="true" ng-change="nuevoServicio=null;serviceError=null;"> Create BikeType
-                </div>
-                <div class="col-md-8 col-md-offset-2" ng-show="customType == 'false'">
-                    <hr/>
-                    <select class="form-control" ng-options='type as type.name for type in bikeTypes' ng-model='selectedType' ng-change="typeError=null;">
-                        <option value="" disabled selected>Select the type for this bike</option>
-                    </select>
-                    <hr/>
-                </div>
-                <div class="col-md-8 col-md-offset-2" ng-show="customType == 'true'">
-                    <hr/>
-                    <h5>Type Name</h5>
-                    <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name">
-                    <h5>Type Capacity</h5>
-                    <input class="form-control" type="text" ng-model="newType.capacity" placeholder="Type capacity">
-                    <br>
-                    <div ng-click="saveType()" class="btn btn-default" ng-disabled="addingType">Save Bike type</div>
-                    <hr/>
-                </div>
-                <div class="col-md-12">
-                    <button class="btn btn-default" ng-click="saveBike()">Save Bike</button>
-                    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-                </div>
+                    <div class="col-md-12">
+                        <label for="newType">BikeType</label>
+                        <br>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="newType" id="newTypeRadios1" value="false" ng-model="customType" required><small>Existing BikeType</small>
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="newType" id="newTypeRadios2" value="true" ng-model="customType" required> <small>Create BikeType</small>
+                            </label>
+                        </div>
+                        <div ng-messages="newBikeForm.newType.$error" role="alert" class="errorMessage" ng-if="newBikeForm.newType.$dirty">
+                                <div ng-message="required">Please select one of the options.</div>
+                            </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4" ng-show="customType == 'false'">
+                        <hr/>
+                        <select class="form-control" ng-options='type as type.name for type in bikeTypes' ng-model='selectedType' ng-change="typeError=null;" ng-required="customType == 'false'">
+                            <option value="" disabled selected>Select the type for this bike</option>
+                        </select>
+                        <hr/>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4" ng-show="customType == 'true'">
+                        <hr/>
+                        <div class="form-group">
+                            <label for="typeName">Type Name</label>
+                            <input class="form-control custom-input" type="text" ng-model="newType.name" placeholder="Type name" ng-required="customType == 'true'" name="ntn"
+                            ng-minlength="1"
+                            ng-maxlength="20">
+                            <div ng-messages="newBikeForm.ntn.$error" role="alert" class="errorMessage" ng-if="newBikeForm.ntn.$dirty">
+                                <div ng-message="required">Type name is required.</div>
+                                <div ng-message="maxlength">Type name is too long.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="typeCapacity">Type Capacity</label>
+                            <input class="form-control" type="number" ng-model="newType.capacity" placeholder="Type capacity"
+                             ng-required="customType == 'true'" name="ntc"
+                             min="1">
+                             <div ng-messages="newBikeForm.ntc.$error" role="alert" class="errorMessage" ng-if="newBikeForm.ntc.$dirty">
+                                <div ng-message="required">Type capacity is required.</div>
+                                <div ng-message="min">Type capacity must be greater than 0.</div>
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
+                    <div class="col-md-12" style="margin-top:10px">
+                        <button class="btn btn-default" ng-click="newBikeForm.$valid && saveBike()">Save Bike</button>
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                    </div>
+                </form>
             </div>
             <hr/>
         </div>
