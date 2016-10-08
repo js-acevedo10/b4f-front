@@ -134,13 +134,17 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
             console.log(response);
         })
     }
+    
     $scope.reserveBike = function (bike) {
-        $http({
+        
+         $http({
             method: 'GET',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/reserve/' + bike.id,
+            url: 'http://bikes4freeg5.herokuapp.com/bikes/reserve',
             headers: {
                 Authorization: auth
-            }
+            },
+            data: JSON.stringify({"bikeId": bike.id, "userId": $localStorage.userInfo.id})
+        
         }).then(function successCallback(response) {
             
             return response;
@@ -150,6 +154,7 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
             console.log(response);
         })
     }
+    
     $scope.saveBike = function () {
         $http({
             method: 'POST',
