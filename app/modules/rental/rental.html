@@ -73,7 +73,7 @@
                         <option value="" disabled selected>Select return point</option>
                     </select>
                     <br>
-                    <select class="form-control" ng-options='rental.id as (rental.bike.brand +" | "+ rental.client.name) for rental in rentals' ng-model='returnInfo.rental' ng-change="">
+                    <select class="form-control" ng-options='rental.id as (rental.bike.brand +" | "+ rental.client.name) for rental in rentals | filter: {delivered:false}' ng-model='returnInfo.rental' ng-change="">
                         <option value="" disabled selected>Select bike to return</option>
                     </select>
                     <br>

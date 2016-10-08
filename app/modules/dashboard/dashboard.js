@@ -20,19 +20,21 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
 
     var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
 
-    $scope.getBike = function (idBike) {
-        $http({
+        $scope.fetchReserves = function () {
+        $scope.bikesPromise = $http({
             method: 'GET',
-            url: 'http://bikes4freeg5.herokuapp.com/bikes/' + idBike,
+            url: 'http://bikes4freeg5.herokuapp.com/rental',
             headers: {
                 Authorization: auth
             }
         }).then(function successCallback(response) {
+            $scope.rentals = response.data;
             console.log(response.data);
         }, function errorCallback(response)  {
 
         })
     }
+    $scope.fetchReserves();
 
     $scope.goToBikes = function () {
         $location.path("/bikes");
