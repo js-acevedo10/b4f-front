@@ -153,7 +153,7 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
         $scope.saveBike = function () {
 
             if ($scope.customType == "true") {
-                saveType();
+                $scope.saveType();
             } else {
                 //$scope.newBike.history = [$scope.selectedVenue];
                 //$scope.newBike.bikeType = $scope.selectedType;

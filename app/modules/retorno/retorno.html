@@ -25,10 +25,10 @@
                             <td>{{place.name}}</td>
                             <td>{{place.address}}</td>
                             <td>{{place.storingCapacity}}</td>
-                            <td>{{place.bikes}}</td>
+                            <td><p ng-repeat="bike in place.bikes">{{bike.id}}</p></td>
                             <td>
-                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editPlace(place)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deletePlace(place)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm btn-block" ng-click="editPlace(place)">Edit</button>
+                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm btn-block" ng-click="deletePlace(place)">Remove</button>
                             </td>
                         </tr>
                     </table>

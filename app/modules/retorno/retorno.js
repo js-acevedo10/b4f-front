@@ -60,7 +60,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
     }
     $scope.fetchPlaces();
 
-
     $scope.addPlace = function () {
         $scope.addingPlace = true;
         $scope.newPlace = {
@@ -68,7 +67,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             bikes: null
         }
     };
-
 
     $scope.cancel = function () {
         $scope.addingPlace = false;
@@ -135,5 +133,4 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
 
     };
 
-
-    }]);
+}]);
