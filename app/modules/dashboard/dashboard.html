@@ -1,13 +1,26 @@
 <div class="container-fluid white">
+    <div ng-controller="DashboardCtrl"> 
         <center>
             <h1>Dashboard</h1>
         </center>
         <br>
         <center>
             <div class="squareContainer">
-                <h5>Nothing to show yet</h5>
+                <h2>Popular Venues (Top 5)</h2>
+                <div ng-repeat="venue in venues | orderBy: '-reservations' | limitTo:5">
+                    <b>{{venue.name}}</b>
+                    <br>
+                    <p># Rentals: {{venue.reservations}}</p>
+                </div>
+                 <h2>Routes</h2>
+                <div ng-repeat="(key,value) in rentals | groupBy: '[origin.name , drop.name]'" >
+                    <p ng-if="key.split(',')[1]">{{key.split(',')[0]}} - {{key.split(',')[1]}} Cantidad </p>
+                </div>
+                </div>
             </div>
         </center>
-
     </div>
+
+
+</div>
 <link rel="stylesheet" href="/modules/dashboard/dashboard.css">

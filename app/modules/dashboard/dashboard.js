@@ -35,6 +35,21 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage'])
         })
     }
     $scope.fetchReserves();
+       $scope.fetchVenues = function () {
+        $scope.bikesPromise = $http({
+            method: 'GET',
+            url: 'http://bikes4freeg5.herokuapp.com/rentplace',
+            headers: {
+                Authorization: auth
+            }
+        }).then(function successCallback(response) {
+            $scope.venues = response.data;
+            console.log(response.data);
+        }, function errorCallback(response)  {
+
+        })
+    }
+    $scope.fetchVenues();
 
     $scope.goToBikes = function () {
         $location.path("/bikes");
