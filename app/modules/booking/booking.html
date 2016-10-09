@@ -3,8 +3,15 @@
     <center>
         <div class="squareContainer content">
             <div class="row" style="width:90%">
+                
+                <hr/>
+                <p style="color:green;" ng-if="client.reservedBike === undefined">You don't have an Active Booking</p>
+                <div ng-if="client.reservedBike !== undefined"><h5>Your current Booking:</h5></div>
+                <hr/>
+            </div>
+            <div class="row" style="width:90%">
                 <center>
-                    <h1>Booking</h1>
+                    <h1>Book a Bike</h1>
                 </center>
                 <hr/>
                 <h5>Select the venue you want to reserve at</h5>
@@ -12,6 +19,7 @@
                             <option value="" disabled selected>Select the venue for this bike</option>
                         </select>
                 
+                <div class="row" ng-if="selectedVenue.bikes.length === 0"><p style="color:red"><br>There are not available bikes in {{selectedVenue.name}}</p></div>
                 <div class="row" style="margin-top:40px;">
                 <div ng-repeat="bike in selectedVenue.bikes" ng-if="!bike.deleted">
                       <div class="col-sm-6 col-md-4">
@@ -33,36 +41,7 @@
             <hr/>
             
             
-            <div class="row" style="width:90%">
-                <center>
-                    <h1>My Bookings</h1>
-                </center>
-                <hr/>
-                <h5>This are your current bookings</h5>
-<!--
-                        <select class="form-control" ng-options='venue as venue.name for venue in venues' ng-model='selectedVenue' ng-change="typeError=null;">
-                            <option value="" disabled selected>Select the venue for this bike</option>
-                        </select>
-                
-                <div class="row" style="margin-top:40px;">
-                <div ng-repeat="bike in selectedVenue.bikes" ng-if="!bike.deleted">
-                      <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                          <img ng-src="{{bike.bikeType.imageURL}}" class="imageType">
-                          <div class="caption">
-                            <h3>{{bike.bikeType.name}}</h3>
-                            <p>Capacity: {{bike.bikeType.capacity}}</p>
-                            <p><a class="btn btn-primary" role="button" id="{{$parent.$index}}-reserve-btn" ng-click="reserveBike(bike)" ng-if="!bike.reserve&&bike.available">Reserve</a></p>
-                            <p style="color:lightGray;" ng-if="bike.reserve&&bike.available"> The bike is reserved </p>
-                          </div>
-                        </div>
-                      </div>
-                    
-                </div>
-                </div>
--->
-                
-            </div>
+            
             <hr/>
         </div>  
     </center>

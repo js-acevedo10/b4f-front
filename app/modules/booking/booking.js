@@ -68,7 +68,21 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
     }, function errorCallback(response)  {
         $scope.error = response.data;
     })
+
     
+    $http({
+            method: 'GET',
+            url: 'http://bikes4freeg5.herokuapp.com/client/'+ $localStorage.userInfo.id,
+            //        url: 'http://localhost:8080/client',
+            headers: {
+                Authorization: auth
+            }
+        }).then(function successCallback(response) {
+            $scope.client = response.data;
+            console.log(response.data);
+        }, function errorCallback(response)  {
+
+        })
 
     $scope.addBike = function () {
         $scope.addingBike = true;
