@@ -8,6 +8,7 @@ angular.module('b4f', [
     'ngMessages',
     'ui.bootstrap',
     'angular.filter',
+    'chart.js',
     'b4f.login',
     'b4f.dashboard',
     'b4f.register',
