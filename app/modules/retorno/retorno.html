@@ -17,7 +17,6 @@
                             <th>Bikes</th>
                             <th>Actions</th>
                         </tr>
-
                         <tr ng-repeat="place in places" class="success">
                             <td>{{place.id}}</td>
                             <td>{{place.name}}</td>
@@ -36,47 +35,53 @@
                     </table>
                 </div>
             </div>
-            <div ng-show="editMode" class="well">
-                <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveRecord()">
+            <div ng-show="editMode">
+                <h1>Edit the Venue in {{newPlace.address}}</h1>
+               <br>
+                <form name="form" id="place-form" role="form" ng-submit="form.$valid && saveRecord()">
                     <fieldset>
                         <input id="id" class="form-control" type="hidden" ng-model="newPlace.id" />
-
                         <label for="address" class="col-md-2 control-label">Address</label>
                         <div class="col-md-10">
-                            <input id="address" name="address" class="form-control" type="text" ng-model="newPlace.address" required />
+                            <input id="address" name="address" class="form-control" type="text" ng-model="newPlace.address" required ng-maxlength="30" />
+                            <div ng-messages="form.address.$error" role="alert" class="errorMessage" ng-if="form.address.$dirty">
+                                <div ng-message="required">Venue address is required.</div>
+                                <div ng-message="maxlength">Venue address is too long.</div>
+                            </div>
                         </div>
-
-
                         <label for="name" class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input id="name" name="name" class="form-control" type="text" ng-model="newPlace.name" required />
+                            <input id="name" name="name" class="form-control" type="text" ng-model="newPlace.name" required
+                            ng-maxlength="30"/>
+                            <div ng-messages="form.name.$error" role="alert" class="errorMessage" ng-if="form.name.$dirty">
+                                <div ng-message="required">Venue name is required.</div>
+                                <div ng-message="maxlength">Venue name is too long.</div>
+                            </div>
                         </div>
-
-
                     </fieldset>
                     <div class="row">
                         <br>
-                        <button class="btn btn-default" ng-click="saveEditedPlace()">Save Venue</button>
+                        <button class="btn btn-default" ng-click="form.$valid && saveEditedPlace()">Save Venue</button>
                         <button class="btn btn-default" ng-click="cancel()">Cancel</button>
                     </div>
                 </form>
             </div>
-            <button class="btn btn-default" ng-click="addPlace()" ng-if="!addingPlace">Add new Venue</button>
+            <button class="btn btn-default" ng-click="addPlace()" ng-if="!addingPlace && !editMode">Add new Venue</button>
             <div class="col-md-4 col-md-offset-4" ng-show="addingPlace">
                 <h1>Add a new Venue</h1>
                 <hr/>
                 <form name="newVenue">
                     <div class="form-group">
-                        <h4>Venue Address</h4>
-                        <input id="address" name="addr" type="text" class="input form-control" ng-model="newPlace.address" placeholder="Venue Address" required ng-maxlength="30">
+                        <label for="address">Venue Adress</label>
+                        <input id="address" name="addr" type="text" class="form-control" ng-model="newPlace.address" placeholder="Venue Address" required ng-maxlength="30">
                         <div ng-messages="newVenue.addr.$error" role="alert" class="errorMessage" ng-if="newVenue.addr.$dirty">
                             <div ng-message="required">Venue address is required.</div>
                             <div ng-message="maxlength">Venue address is too long.</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h4>Venue Name</h4>
-                        <input id="name" name="name" type="text" class="input form-control" ng-model="newPlace.name" placeholder="Venue Name" required ng-maxlength="30">
+                        <label for="name">Venue Name</label>
+                        <input id="name" name="name" type="text" class="form-control" ng-model="newPlace.name" placeholder="Venue Name" required ng-maxlength="30">
                         <div ng-messages="newVenue.name.$error" role="alert" class="errorMessage" ng-if="newVenue.name.$dirty">
                             <div ng-message="required">Venue name is required.</div>
                             <div ng-message="maxlength">Venue name is too long.</div>
@@ -89,7 +94,6 @@
                 </form>
                 <hr/>
             </div>
-
         </div>
     </center>
 </div>
