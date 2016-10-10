@@ -29,6 +29,7 @@
         <a href="#!/rentplace" ng-click="closeNav()" ng-if="isAdmin() || isManager()">Venues</a>
         <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
         <a href="#!/booking" ng-click="closeNav()" ng-if="isUser()">Booking</a>
+        <a href="#!/urental" ng-click="closeNav()" ng-if="isUser()">Rentals</a>
         <a href="#!/admin/users" ng-click="closeNav()" ng-if="isAdmin()">Users</a>
         <a href="#!/rental" ng-click="closeNav()" ng-if="isManager()">Bike Rental</a>
         <hr>
@@ -48,8 +49,9 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
-    <script src="bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
     <script src="app.js"></script>
     <script src="modules/login/login.js"></script>
     <script src="modules/dashboard/dashboard.js"></script>
@@ -60,6 +62,7 @@
     <script src="modules/users/users.js"></script>
     <script src="modules/booking/booking.js"></script>
     <script src="modules/rental/rental.js"></script>
+    <script src="modules/user-rental/user-rental.js"></script>
 
     <!--    Css libs-->
     <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">

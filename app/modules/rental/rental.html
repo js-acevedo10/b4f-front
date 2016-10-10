@@ -21,7 +21,7 @@
             <div class="col-md-6 col-sm-12 penalties" ng-show="bikes != undefined && bikes.length > 0">
                 <p class="detail-header">Bikes in {{currentVenue}}</p>
                 <hr>
-                <div class="row" ng-repeat="bike in bikes">
+                <div class="row" ng-repeat="bike in bikes | filter:{deleted:false}">
                     <div class="col-12">
                         <div class="detail">{{bike.brand}}</div>
                         <p ng-class="isAvilable(bike.reserve)">{{isAvilable(bike.reserve)}}</p>
