@@ -68,8 +68,8 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
                         var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
                         $scope.addingUser = $http({
                             method: 'PUT',
-//                            url: 'http://bikes4freeg5.herokuapp.com/rental/'+rental.id,
-                            url: 'http://localhost:8080/rental/'+rental.id,
+                            url: 'http://bikes4freeg5.herokuapp.com/rental/'+rental.id,
+//                            url: 'http://localhost:8080/rental/'+rental.id,
                             data: $scope.client,
                             headers: {
                                 "Authorization": accessToken
