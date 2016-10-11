@@ -16,7 +16,22 @@
                 <div ng-repeat="(key,value) in rentals | groupBy: '[origin.name , drop.name]'" >
                     <p ng-if="key.split(',')[1]">{{key.split(',')[0]}} - {{key.split(',')[1]}} Cantidad </p>
                 </div>
+                <h2>Trip Duration</h2>
+                <div>
+                <canvas id="line" class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-series="series" chart-options="options"
+                    chart-dataset-override="datasetOverride"</canvas> 
                 </div>
+                    <h4>Hours</h4>
+                <h2>Preferred Hours</h2>
+                <div>
+                <canvas id="line2" class="chart chart-line" chart-data="data2"
+                    chart-labels="labels2" chart-series="series2" chart-options="options2"
+                    chart-dataset-override="datasetOverride2"</canvas> 
+                </div>
+                    <h4>Hour</h4>
+            </div>
+                
             </div>
         </center>
     </div>
