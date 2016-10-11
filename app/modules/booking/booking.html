@@ -23,7 +23,7 @@
                 <div class="row" ng-if="selectedVenue.bikes.length === 0"><p style="color:red"><br>There are not available bikes in {{selectedVenue.name}}</p></div>
                 <div class="row" style="margin-top:40px;">
                 <div ng-repeat="bike in selectedVenue.bikes" ng-if="!bike.deleted">
-                      <div class="col-sm-6 col-md-4">
+                      <div class="col-sm-2 col-md-2">
                         <div class="thumbnail">
                           <img ng-src="{{bike.bikeType.imageURL}}" class="imageType">
                           <div class="caption">
