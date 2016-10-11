@@ -5,8 +5,9 @@
             <div class="row" style="width:90%">
                 
                 <hr/>
-                <p style="color:green;" ng-if="client.reservedBike === undefined">You don't have an Active Booking</p>
-                <div ng-if="client.reservedBike !== undefined"><h5>Your current Booking:</h5></div>
+                <p style="color:green;" ng-if="client.reserverdBike === undefined">You don't have an Active Booking</p>
+                <div ng-if="client.reserverdBike !== undefined"><h5>Your current Booking:</h5> <h3 style="color:green;">{{client.reserverdBike.brand}} | {{client.reserverdBike.bikeType.name}}</h3>
+                            <p style="color:green;">Capacity: {{client.reserverdBike.bikeType.capacity}}</p> </div>
                 <hr/>
             </div>
             <div class="row" style="width:90%">
@@ -26,10 +27,13 @@
                         <div class="thumbnail">
                           <img ng-src="{{bike.bikeType.imageURL}}" class="imageType">
                           <div class="caption">
-                            <h3>{{bike.bikeType.name}}</h3>
+                            <h3>Type: {{bike.bikeType.name}}</h3>
+                            <h4>Brand: {{bike.brand}}</h4>
                             <p>Capacity: {{bike.bikeType.capacity}}</p>
-                            <p><a class="btn btn-primary" role="button" id="{{$parent.$index}}-reserve-btn" ng-click="reserveBike(bike)" ng-if="!bike.reserve&&bike.available">Reserve</a></p>
-                            <p style="color:lightGray;" ng-if="bike.reserve&&bike.available"> The bike is reserved </p>
+                            <p><a class="btn btn-primary" role="button" id="{{$parent.$index}}-reserve-btn" ng-click="reserveBike(bike)" ng-if="!bike.reserve&&bike.available&&client.reserverdBike === undefined">Reserve</a></p>
+                            <p style="color:red;" ng-if="client.reserverdBike !== undefined"> You can´t have more than one active booking </p>
+                            <p style="color:red;" ng-if="bike.reserve&&bike.available"> The bike is reserved </p>
+                              
                           </div>
                         </div>
                       </div>

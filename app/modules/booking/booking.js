@@ -162,6 +162,8 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
         
         }).then(function successCallback(response) {
             
+             $scope.client.reserverdBike = bike;
+             
             return response;
 
         }, function errorCallback(response)  {
