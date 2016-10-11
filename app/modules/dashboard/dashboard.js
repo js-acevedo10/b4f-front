@@ -61,7 +61,7 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage','chart.js'])
     $scope.labels = ["0","1", "2", "3", "4", "5", "6"];
   $scope.series = ['Trip Duration'];
   $scope.data = [
-    [65, 59, 80, 81, 56, 55,100]
+    [0, 0, 0, 0, 0, 0, 0]
   ];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
