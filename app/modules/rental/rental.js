@@ -31,7 +31,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             $scope.venues = response.data;
         }, function errorCallback(response)  {
             $scope.error = response.data;
-        })
+        });
 
         $scope.searchVenueBikes = function (venueId) {
             $scope.bikes = [];
@@ -52,7 +52,26 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
             
         }
+        
+        $scope.search = {mail:""};
 
+        $scope.searchClient = function () {
+            
+            $scope.userSearched = true;
+            
+            $scope.loading = $http({
+                method: 'PUT',
+                url: 'http://bikes4freeg5.herokuapp.com/client/m',
+                headers: {
+                    Authorization: auth
+                },
+                data: JSON.stringify($scope.search)
+            }).then(function successCallback(response) {
+                $scope.reservedBike = response.data.reserverdBike;
+            }, function errorCallback(response)  {
+                $scope.error = response.data;
+            });
+        }
 
         $scope.isAvilable = function (reserve) {
             if (!reserve) {

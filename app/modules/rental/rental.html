@@ -12,6 +12,22 @@
         <h1>{{succes}}</h1>
     </div>
     <div class="container-fluid white" cg-busy="{promise:loading,minDuration:1000}">
+        <div class="search-reserved row">
+            <h2>Search reservations by client mail:</h2>
+            <div class="col-xs-12">
+                <form ng-submit="searchClient()">
+                    <input class="form-control col-xs-12" placeholder="Client mail" type="mail" ng-model="search.mail" required>
+                    <button class="btn-sp-blue lg" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-xs-12" ng-show="reservedBike">
+                <h2>Reserved bike: {{reservedBike.brand}}</h2>
+                <button class="btn btn-sp-blue" ng-click="rentBike(reservedBike)">Rent this bike</button>
+            </div>
+            <div class="col-xs-12" ng-show="!reservedBike && userSearched">
+                <h3>This client doesn't have any booked bike</h3>
+            </div>
+        </div>
         <div class="content squareContainer row">
            <h2>Select a venue to see bikes avilable:</h2>
             <div class="col-md-6 col-sm-12 clients">
