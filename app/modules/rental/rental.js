@@ -62,6 +62,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             $scope.loading = $http({
                 method: 'PUT',
                 url: 'http://bikes4freeg5.herokuapp.com/client/m',
+//                url: 'http://localhost:8080/client/m',
                 headers: {
                     Authorization: auth
                 },
