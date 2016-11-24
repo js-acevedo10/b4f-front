@@ -16,7 +16,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
     });
 }])
 
-.controller('PlaceCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+.controller('PlaceCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
     $scope.editMode = false;
     $scope.editPlace = function (place) {
         console.log(place);
@@ -39,7 +39,7 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
         })
     }
 
-    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
+    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
 
 
     $scope.fetchPlaces = function () {

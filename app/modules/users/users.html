@@ -42,14 +42,28 @@
                 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
                 <br>
             </div>
-            <form ng-submit="okAdd()">
+            <form ng-submit="okAdd()" name="regFormC">
                 <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="client.name" maxlength="50" required>
+                    <input type="text" class="input form-control" placeholder="Name" name="name" id="name" ng-model="client.name" ng-maxlength="20" required>
+                    <div ng-messages="regFormC.name.$error" role="alert" class="errorMessage" ng-if="regFormC.name.$dirty">
+                        <div ng-message="required">Your name is required.</div>
+                        <div ng-message="password">Please enter a valid name.</div>
+                        <div ng-message="maxlength">Maximum name length is 20.</div>
+                    </div>
                     <br>
-                    <input type="mail" class="form-control" placeholder="Mail" ng-model="client.email" maxlength="50" required>
+                    <input type="email" class="input form-control" name="email" placeholder="Mail" id="email" ng-model="client.email" required>
+                    <div ng-messages="regFormC.email.$error" role="alert" class="errorMessage" ng-if="regFormC.email.$dirty">
+                        <div ng-message="required">Your email is required.</div>
+                        <div ng-message="email">Please enter a valid email.</div>
+                    </div>
                     <br>
-                    <input type="password" class="form-control" placeholder="Password" ng-model="client.password" required>
-
+                    <input type="password" class="input form-control" placeholder="Password" name="pass" id="pass" ng-model="client.password" ng-minlength="6" ng-maxlength="12" required>
+                    <div ng-messages="regFormC.pass.$error" role="alert" class="errorMessage" ng-if="regFormC.pass.$dirty">
+                        <div ng-message="required">Your password is required.</div>
+                        <div ng-message="password">Please enter a valid password.</div>
+                        <div ng-message="maxlength">Maximum password length is 12.</div>
+                        <div ng-message="minlength">Minimum password length is 6.</div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn-sp-red" type="button" ng-click="dismiss()">Close</button>
@@ -66,14 +80,28 @@
                 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
                 <br>
             </div>
-            <form ng-submit="okAdd()">
+            <form ng-submit="okAdd()" name="regFormM">
                 <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="manager.name" maxlength="50" required>
+                    <input type="text" class="input form-control" placeholder="Name" name="name" id="name" ng-model="manager.name" ng-maxlength="20" required>
+                    <div ng-messages="regFormM.name.$error" role="alert" class="errorMessage" ng-if="regFormM.name.$dirty">
+                        <div ng-message="required">Your name is required.</div>
+                        <div ng-message="password">Please enter a valid name.</div>
+                        <div ng-message="maxlength">Maximum name length is 20.</div>
+                    </div>
                     <br>
-                    <input type="mail" class="form-control" placeholder="Mail" ng-model="manager.email" maxlength="50" required>
+                    <input type="email" class="input form-control" name="email" placeholder="Mail" id="email" ng-model="manager.email" required>
+                    <div ng-messages="regFormM.email.$error" role="alert" class="errorMessage" ng-if="regFormM.email.$dirty">
+                        <div ng-message="required">Your email is required.</div>
+                        <div ng-message="email">Please enter a valid email.</div>
+                    </div>
                     <br>
-                    <input type="password" class="form-control" placeholder="Password" ng-model="manager.password" required>
-
+                    <input type="password" class="input form-control" placeholder="Password" name="pass" id="pass" ng-model="manager.password" ng-minlength="6" ng-maxlength="12" required>
+                    <div ng-messages="regFormM.pass.$error" role="alert" class="errorMessage" ng-if="regFormM.pass.$dirty">
+                        <div ng-message="required">Your password is required.</div>
+                        <div ng-message="password">Please enter a valid password.</div>
+                        <div ng-message="maxlength">Maximum password length is 12.</div>
+                        <div ng-message="minlength">Minimum password length is 6.</div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn-sp-red" type="button" ng-click="dismiss()">Close</button>

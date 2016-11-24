@@ -18,8 +18,8 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             }
         });
     }])
-    .controller('RentalCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', function ($scope, $http, $localStorage, $location, $route, $uibModal) {
-        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
+    .controller('RentalCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', '$base64', function ($scope, $http, $localStorage, $location, $route, $uibModal, $base64) {
+        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
 
         $scope.loading = $http({
             method: 'GET',
@@ -86,7 +86,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'rent-bike.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, bikeS, venueS) {
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, bikeS, venueS, $base64) {
 
                     $scope.bike = bikeS;
                     $scope.venueName = venueS;
@@ -97,7 +97,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
                     $scope.okRent = function () {
 
-                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
                         
                         
                         $scope.rentingBike = $http({
@@ -147,10 +147,10 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'return-bike.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, venues) {
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, venues, $base64) {
                     
                 
-                    var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                    var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
                     
                     $scope.venues = venues;
                     $scope.returningBike = $http({
@@ -203,7 +203,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                             var modalInstance2 = $uibModal.open({
                                 animation: true,
                                 templateUrl: 'recipt.html',
-                                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, certificate) {
+                                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, certificate, $base64) {
 
                                     $scope.certificate = JSON.parse(certificate);
                                     $scope.dismiss = function () {

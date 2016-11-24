@@ -2,7 +2,7 @@
 
 angular.module('b4f.users', ['ngRoute', 'ngStorage'])
 
-.config(['$routeProvider', function ($routeProvider) {
+.config(['$routeProvider', '$base64', function ($routeProvider, $base64) {
         $routeProvider.when('/admin/users', {
             templateUrl: 'modules/users/users.html',
             controller: 'UsersCtrl',
@@ -11,15 +11,15 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                     if ($localStorage.userInfo == undefined) {
                         $location.path('/login');
                     }
-                    if ($localStorage.userInfo.role != "admin") {
+                    if ($base64.decode($localStorage.userInfo[$base64.encode('role')]) != "admin") {
                         $location.path('/login');
                     }
                 }]
             }
         });
     }])
-    .controller('UsersCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', function ($scope, $http, $localStorage, $location, $route, $uibModal) {
-        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
+    .controller('UsersCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', '$base64', function ($scope, $http, $localStorage, $location, $route, $uibModal, $base64) {
+        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
 
         $scope.loading = $http({
             method: 'GET',
@@ -110,7 +110,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add-client.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage) {
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, $base64) {
 
                     $scope.client = {
                         name: "",
@@ -121,7 +121,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
 
                     $scope.okAdd = function () {
                         
-                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
                         $scope.addingClient = $http({
                             method: 'POST',
                             url: 'http://bikes4freeg5.herokuapp.com/client',
@@ -162,7 +162,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add-manager.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage) {
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, $base64) {
 
                     $scope.manager = {
                         name: "",
@@ -173,7 +173,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
 
                     $scope.okAdd = function () {
 
-                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
                         $scope.addingManager = $http({
                             method: 'POST',
                             url: 'http://bikes4freeg5.herokuapp.com/manager',

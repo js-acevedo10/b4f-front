@@ -15,9 +15,9 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             }
         });
 }])
-    .controller('BikesCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+    .controller('BikesCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
 
-        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
+        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
 
         $scope.editMode = false;
         $scope.fetchBikes = function () {

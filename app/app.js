@@ -9,6 +9,7 @@ angular.module('b4f', [
     'ui.bootstrap',
     'angular.filter',
     'chart.js',
+    'base64',
     'b4f.login',
     'b4f.dashboard',
     'b4f.register',
@@ -20,7 +21,7 @@ angular.module('b4f', [
     'b4f.rental',
     'b4f.userRental'
 ])
-    .controller('NavController', ['$scope', '$localStorage', '$location', function ($scope, $localStorage, $location) {
+    .controller('NavController', ['$scope', '$localStorage', '$location', '$base64', function ($scope, $localStorage, $location, $base64) {
         $scope.isLoginNav = function () {
             if ($location.path() == "/login" || $location.path() == "/register") {
                 return 'greenNav';
@@ -43,21 +44,21 @@ angular.module('b4f', [
         }
         
         $scope.isAdmin = function () {
-            if($scope.isLogged() && $localStorage.userInfo.role == "admin") {
+            if($scope.isLogged() && $base64.decode($localStorage.userInfo[$base64.encode('role')]) == "admin") {
                 return true;
             }
             return false;
         }
         
         $scope.isUser = function () {
-            if($scope.isLogged() && $localStorage.userInfo.role == "client") {
+            if($scope.isLogged() && $base64.decode($localStorage.userInfo[$base64.encode('role')]) == "client") {
                 return true;
             }
             return false;
         }
         
         $scope.isManager = function () {
-            if($scope.isLogged() && $localStorage.userInfo.role == "manager") {
+            if($scope.isLogged() && $base64.decode($localStorage.userInfo[$base64.encode('role')]) == "manager") {
                 return true;
             }
             return false;

@@ -16,10 +16,11 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
     });
     }])
 
-.controller('BookingCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+.controller('BookingCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
 
-    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
-
+    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+    var id = $base64.decode($localStorage.userInfo[$base64.encode('id')]);
+    
     $scope.editMode = false;
     $scope.fetchBikes = function () {
         $http({
@@ -72,7 +73,7 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
     
     $http({
             method: 'GET',
-            url: 'http://bikes4freeg5.herokuapp.com/client/'+ $localStorage.userInfo.id,
+            url: 'http://bikes4freeg5.herokuapp.com/client/'+ id,
             //        url: 'http://localhost:8080/client',
             headers: {
                 Authorization: auth
@@ -158,7 +159,7 @@ angular.module('b4f.booking', ['ngRoute', 'ngStorage'])
             headers: {
                 Authorization: auth
             },
-            data: JSON.stringify({"bikeId": bike.id, "userId": $localStorage.userInfo.id})
+            data: JSON.stringify({"bikeId": bike.id, "userId": id})
         
         }).then(function successCallback(response) {
             

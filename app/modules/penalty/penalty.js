@@ -16,11 +16,11 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
     });
     }])
 
-.controller('PenaltyCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+.controller('PenaltyCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
 
-    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
-    var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.role : undefined;
-    var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.id : undefined;
+    var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+    var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('role')]) : undefined;
+    var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
     
     if (role == "client"){
         $http({

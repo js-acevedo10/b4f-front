@@ -17,10 +17,10 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
             }
         });
     }])
-    .controller('usrRentalCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', function ($scope, $http, $localStorage, $location, $route, $uibModal) {
+    .controller('usrRentalCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', '$base64', function ($scope, $http, $localStorage, $location, $route, $uibModal, $base64) {
 
-        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.token : undefined;
-        var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $localStorage.userInfo.id : undefined;
+        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
         
         $scope.loading = $http({
             method: 'GET',
@@ -55,7 +55,7 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add-user.html',
-                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, rental) {
+                controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, rental, $base64) {
 
                     $scope.client = {
                         mail: "",
@@ -65,7 +65,8 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
                     
                     $scope.okAdd = function () {
 
-                        var accessToken = $localStorage.userInfo !== undefined ? $localStorage.userInfo.accessToken : null;
+                        var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+                        
                         $scope.addingUser = $http({
                             method: 'PUT',
                             url: 'http://bikes4freeg5.herokuapp.com/rental/'+rental.id,

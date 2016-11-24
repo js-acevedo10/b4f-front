@@ -15,7 +15,7 @@ angular.module('b4f.register', ['ngRoute', 'ngStorage'])
         }
     });
 }])
-.controller('RegisterCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+.controller('RegisterCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
     $scope.clientVisible = true;
     $scope.adminVisible = false;
     $scope.managerVisible = false;
@@ -25,8 +25,14 @@ angular.module('b4f.register', ['ngRoute', 'ngStorage'])
             url: 'http://bikes4freeg5.herokuapp.com/client',
             data: JSON.stringify($scope.register)
         }).then(function successCallback(response) {
-            $localStorage.userInfo = response.data;
-            console.log(response.data);
+//                var x = angular.copy(response.data);
+//                var y = {};
+//                angular.forEach(x, function (value, key) {
+//                    value = $base64.encode(value);
+//                    y[$base64.encode(key)] = value;
+//                })
+//                $localStorage.userInfo = y;
+                $localStorage.userInfo = response.data;
             $location.path("/dashboard");
         }, function errorCallback(response) {
             console.error(response.data);
@@ -38,8 +44,14 @@ angular.module('b4f.register', ['ngRoute', 'ngStorage'])
             url: 'http://bikes4freeg5.herokuapp.com/admin',
             data: JSON.stringify($scope.registerA)
         }).then(function successCallback(response) {
-            $localStorage.userInfo = response.data;
-            console.log(response.data);
+//                var x = angular.copy(response.data);
+//                var y = {};
+//                angular.forEach(x, function (value, key) {
+//                    value = $base64.encode(value);
+//                    y[$base64.encode(key)] = value;
+//                })
+//                $localStorage.userInfo = y;
+                $localStorage.userInfo = response.data;
             $location.path("/dashboard");
         }, function errorCallback(response) {
             console.error(response.data);
@@ -51,8 +63,14 @@ angular.module('b4f.register', ['ngRoute', 'ngStorage'])
             url: 'http://bikes4freeg5.herokuapp.com/manager',
             data: JSON.stringify($scope.registerM)
         }).then(function successCallback(response) {
-            $localStorage.userInfo = response.data;
-            console.log(response.data);
+//                var x = angular.copy(response.data);
+//                var y = {};
+//                angular.forEach(x, function (value, key) {
+//                    value = $base64.encode(value);
+//                    y[$base64.encode(key)] = value;
+//                })
+//                $localStorage.userInfo = y;
+                $localStorage.userInfo = response.data;
             $location.path("/dashboard");
         }, function errorCallback(response) {
             console.error(response.data);

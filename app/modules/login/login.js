@@ -15,13 +15,20 @@ angular.module('b4f.login', ['ngRoute', 'ngStorage'])
             }
         });
 }])
-    .controller('LoginCtrl', ['$scope', '$http', '$localStorage', '$location', function ($scope, $http, $localStorage, $location) {
+    .controller('LoginCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
         $scope.submit = function () {
             $scope.loginPromise = $http({
                 method: 'POST',
                 url: 'http://bikes4freeg5.herokuapp.com/auth',
                 data: JSON.stringify($scope.loginForm)
             }).then(function successCallback(response) {
+//                var x = angular.copy(response.data);
+//                var y = {};
+//                angular.forEach(x, function (value, key) {
+//                    value = $base64.encode(value);
+//                    y[$base64.encode(key)] = value;
+//                })
+//                $localStorage.userInfo = y;
                 $localStorage.userInfo = response.data;
                 $location.path("/dashboard");
             }, function errorCallback(response) {
