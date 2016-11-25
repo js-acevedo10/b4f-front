@@ -36,7 +36,6 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.clients = [response.data];
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         })
@@ -72,7 +71,6 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.clients = response.data;
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         })

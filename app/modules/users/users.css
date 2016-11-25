@@ -23,11 +23,47 @@
 
 .detail {
     width: 100%;
-    background-color: 
+    color: white;
+}
+
+.detail h3{
+    width: 100%;
+    color: white;
+    min-height: 60px;
 }
 
 .penalties {
     overflow-y: scroll;
+    background-color: rgb(57, 67, 80); 
+    color: white;
+    border-radius: 20px;
+}
+
+.penalties p{
+    color: white;
+}
+
+.t{
+    background-color: white;
+    min-height: 60px;
+
+}
+.t h4{
+    color: rgb(57, 67, 80) !important;
+}
+
+.p{
+    min-height: 60px;
+}
+
+.p h4{
+    color: white !important;
+}
+
+.s{
+    background-color: rgb(108, 129, 150);
+    margin-bottom: 10px;
+    min-height: 60px;
 }
 
 .client-row{
@@ -60,46 +96,77 @@
     color: red;
 }
 
-.btn-sp-red {
-    background-color: transparent;
-    border-style: solid;
-    border-width: 1px;
-    border-color: red;
-    color: red;
-    border-radius: 5px;
-    text-align: center;
-    padding: 1vh;
-    margin-top: 10px;
-    font-weight: 300;
+
+
+h1, h2, h3, h4, h5, p, a, label {
+    color: white;
 }
 
-.btn-sp-red:hover,
-.btn-red:active,
-.btn-red:focus {
-    border-color: tomato;
-    color: tomato;
-    cursor: pointer;
+p:hover{
+    color: #2FAC66;
 }
 
-.btn-sp-blue {
-    background-color: transparent;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #007EFF;
-    color: #007EFF;
-    border-radius: 5px;
-    text-align: center;
-    padding: 1vh;
-    margin-top: 5px;
-    font-weight: 300;
-    font-size: 12px;
+.squareContainer{
+    background-color: rgb(57, 67, 80);
+    width: 90%;
+    height: 200px;
+    border: none;
+    border-radius: 25px;
+    border-color: rgb(230, 230, 230);
+    overflow: auto;
+    height: 100%;
     margin-bottom: 20px;
 }
+.clickable {
+    color:#2FAC66;
+}
 
-.btn-sp-blue:hover,
-.btn-sp-blue:active,
-.btn-sp-blue:focus {
-    border-color: #019FFF;
-    color: #019FFF;
+.clickable:hover{
+    color:white;
     cursor: pointer;
+}
+.clickable-red {
+    color:tomato;
+}
+
+.clickable-red:hover{
+    color:white;
+    cursor: pointer;
+}
+
+.btn{
+    margin-bottom: 20px;
+    background-color: #2FAC66;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.btn:hover{
+    margin-bottom: 20px;
+    background-color: white;
+    color: #2FAC66;
+}
+
+.well > h2, .well > h4{
+    color: #2FAC66;
+}
+
+.red{
+    background-color: white !important;
+    color: tomato !important;
+}
+
+.red:hover{
+    background-color: tomato !important;
+    color: white !important;
+}
+
+.dark{
+    background-color: rgb(108, 129, 150) !important;
+    color: white !important;
+}
+
+.dark:hover{
+    background-color: white !important;
+    color: rgb(108, 129, 150) !important;
 }

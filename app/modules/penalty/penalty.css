@@ -4,7 +4,22 @@
 .client{
     text-align:left;
     overflow-x: scroll;
+    height: 60px;
+    background-color: rgb(57, 67, 80);
+    color: white;
+    border:none;
 }
+.client:hover{
+    background-color: white;
+    color: #2FAC66;
+    border: 1px solid;
+    border-color: #2FAC66;
+}
+.client:focus{
+    background-color: #2FAC66;
+    color: white;
+}
+
 .clients{   
     overflow-y: scroll;
 }
@@ -23,9 +38,38 @@
 
 .detail {
     width: 100%;
-    background-color: 
+    color: white;
+}
+
+.detail h3{
+    width: 100%;
+    color: white;
 }
 
 .penalties {
     overflow-y: scroll;
+    background-color: rgb(57, 67, 80); 
+    color: white;
+    border-radius: 20px;
+}
+
+.penalties p{
+    color: white;
+}
+
+.t{
+    background-color: white;
+    
+}
+.t h4{
+    color: rgb(57, 67, 80) !important;
+}
+
+.p h4{
+    color: white !important;
+}
+
+.s{
+    background-color: rgb(108, 129, 150);
+    margin-bottom: 10px;
 }

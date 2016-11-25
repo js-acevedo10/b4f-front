@@ -1,31 +1,35 @@
 <div class="container-fluid white">
     <div class="row text-center header">
-        <h1>Penalties</h1></div>
+        <h1>Penalties</h1>
+    </div>
     <div class="content squareContainer row">
         <div class="col-md-6 col-sm-12 clients">
-            <button ng-repeat="client in clients" ng-click="searchClientPenalties(client.id, client.email)" class="btn btn-default btn-block client">{{client.name}}</button>
+           <h3>Clients</h3>
+           <hr widht="100vw" size="100vw">
+            <button ng-repeat="client in clients" ng-click="searchClientPenalties(client.id, client.name)" class="btn btn-default btn-block client">{{client.name}}</button>
         </div>
         <!--        <div class="col-md-1 col-sm-12"></div>-->
         <div class="col-md-6 col-sm-12 penalties" ng-show="penalties != undefined && penalties.length > 0">
+            <br><br>
             <p class="detail-header">Penalties of {{currentUser}}</p>
-            <hr>
+            <hr widht="100vw" size="100vw">
             <div class="row" ng-repeat="penalty in penalties">
-                <div class="col-12">
-                    <div class="detail">Fee: {{penalty.fee}}</div>
+                <div class="col-xs-4">
+                    <div class="detail"><h3>Fee: {{penalty.fee}}</h3></div>
                 </div>
-                <div class="col-12">
-                    <div class="label label-primary">Training required: {{penalty.trainingRequiered?'Yes':'No'}}</div>
+                <div class="col-xs-4 t">
+                    <h4>Training required: {{penalty.trainingRequiered?'Yes':'No'}}</h4>
                 </div>
-                <div class="col-12">
-                    <div class="label" ng-class="penaltyClass(penalty.pending)">Payment pending: {{penalty.pending ? "Yes":"No"}}</div>
+                <div class="col-xs-4 p" ng-class="penaltyClass(penalty.pending)">
+                    <h4>Payment pending: {{penalty.pending ? "Yes":"No"}}</h4>
                 </div>
-                <div class="col-12">
-                    <div class="label label-warning">Suspended until: {{isSuspended(penalty.suspensionEnd)}}</div>
+                <div class="col-xs-8 s p">
+                    <h4>Suspended until: {{isSuspended(penalty.suspensionEnd)}}</h4>
                 </div>
-                <hr>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12" ng-show="penalties.length == 0">
+        <div class="col-md-6 col-sm-12 penalties" ng-show="penalties.length == 0">
+           <br><br>
             <p class="detail-header">{{currentUser}} has no penalties</p>
         </div>
     </div>

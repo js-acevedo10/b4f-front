@@ -30,7 +30,6 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.clients = response.data;
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         })
@@ -44,7 +43,6 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.managers = response.data;
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         })
@@ -58,7 +56,6 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.admins = response.data;
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         })
@@ -157,9 +154,9 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
         };
 
         $scope.penalizeClient = function (client) {
-            $scope.clientAccounted = undefined;
+            client.clientAccounted = undefined;
             var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
-            $scope.penalizingClient = $http({
+            client.penalizingClient = $http({
                 method: 'POST',
                 url: 'http://bikes4freeg5.herokuapp.com/penalty/' + client.id,
                 headers: {
@@ -168,7 +165,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             }).then(function successCallback(response) {
                 $scope.succes = response.data;
                 if (typeof $scope.succes === 'string' || $scope.succes instanceof String) {
-                    $scope.clientAccounted = "Client bonus have been accounted";
+                    client.clientAccounted = "Client bonus have been accounted";
                 } else {
                     var modalInstance = $uibModal.open({
                         animation: true,
