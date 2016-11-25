@@ -25,7 +25,7 @@ angular.module('b4f.map', ['ngRoute', 'ngStorage','uiGmapgoogle-maps'])
     var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('role')]) : undefined;
     var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
       
-   $scope.map = { center: { latitude: 4.71, longitude: -74.07 }, zoom: 8 ,markers: [],};
+   $scope.map = { center: { latitude: 4.71, longitude: -74.07 }, zoom: 10 ,markers: [],};
   IsReady.promise()                     // this gets all (ready) map instances - defaults to 1 for the first map
     .then(function(instances) {                 // instances is an array object
         $scope.datMap = instances[0].map;            // if only 1 map it's found at index 0 of array
