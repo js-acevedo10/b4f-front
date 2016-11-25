@@ -17,7 +17,7 @@
 }
 
 .dark{
-    color: rgb(74,85,102);
+    color: rgb(57, 67, 80);
 }
 
 .bike{
@@ -36,7 +36,7 @@
 /*    text-shadow: 2px 2px black;*/
     text-align: center;
     width: 100%;
-    background-color: #2FAC66;
+    background-color: rgb(57, 67, 80);
     margin: 0;
     opacity: 0.8;
     padding-bottom: 5px;
@@ -46,15 +46,23 @@
     height:28px;
     line-height: 25px;
     border-style: solid;
-    border-width: 0px 1px 1px 1px;
-    border-color: #2FAC66;
+    border-width: 0px 0px 0px 0px;
+    border-color: darkgray;
+    text-align: left;
+    padding-left: 5px;
+    background-color: rgb(57, 67, 80);
+}
+.bike_item p{
+    color: white;
 }
 .bike_buttons{
     height: 60px;
     border-style: solid;
     border-width: 0px 1px 1px 1px;
-    border-color: #2FAC66;
+    border-color: rgb(57, 67, 80);
+    background-color: rgb(108, 129, 150);
     width: 100%;
+    
 }
 .bike_buttons button{
     background-color: #2FAC66;
@@ -66,16 +74,17 @@
 }
 
 .bike_buttons > button:hover{
-    background-color: #3ABD66;
-    color: white;
+    background-color: white;
+    color: #2FAC66;
 }
 
 .red{
-    background-color: tomato !important;
-    color: white;
+    background-color: white !important;
+    color: tomato !important;
 }
 .red:hover{
-    background-color: red !important;
+    background-color: tomato !important;
+    color: white !important;
 }
 .bikeImg {
     height: 180px;
