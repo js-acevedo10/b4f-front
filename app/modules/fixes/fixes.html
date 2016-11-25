@@ -1,0 +1,78 @@
+<div class="container-fluid white">
+    <br>
+    <center>
+        <div class="squareContainer content">
+
+            <div style="height: 40vh !important; overflow: scroll;">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Fix ID</th>
+                        <th>Fix Name</th>
+                        <th>Fee</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr ng-repeat="reparacion in reparaciones" class="success">
+                        <td>{{reparacion.id}}</td>
+                        <td>{{reparacion.fixName}}</td>
+                        <td>{{reparacion.fee}}</td>
+                        <td>
+                            <a id="{{$parent.$index}}-edit-btn" ng-click="editFix(reparacion)">Editar</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div ng-show="editMode" class="well">
+                <h3>Editing Fix</h3>
+                <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
+                    <fieldset>
+                        <input id="id" class="form-control" type="hidden" ng-model="newFix.id" />
+                        <div class="col-md-12">
+                            <h4>Fix Name</h4>
+                            <input id="fixName" name="fixName" class="form-control" type="text" ng-model="newFix.fixName" required />
+
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-md-12">
+                            <h4>Fix Fee</h4>
+                            <input id="fee" name="fee" class="form-control" type="text" ng-model="newFix.fee" required />
+                        </div>
+
+                    </fieldset>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-default" ng-click="saveEditedFix()">Save Fix</button>
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <h1>Add new Fix</h1>
+                <br>
+                <form name="newFixForm" style="width:90%">
+
+                    <label for="fixName">Fix Name</label>
+                    <input id="fixName" name="fixName" class="form-control" type="text" ng-model="newFix.fixName" required ng-maxlength="20" />
+
+                    <label for="fee">Fixing Fee</label>
+                    <input id="fee" name="fee" class="form-control" type="number" ng-model="newFix.fee" required ng-maxlength="20" />
+
+                    <br>
+                    <button class="btn btn-default" ng-click="newFixForm.$valid && saveFix()">Save Fix</button>
+                    <br>
+
+
+                </form>
+
+
+
+            </div>
+
+
+
+        </div>
+    </center>
+
+</div>

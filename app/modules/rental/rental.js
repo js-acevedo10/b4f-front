@@ -2,7 +2,7 @@
 
 angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
-    .config(['$routeProvider', function ($routeProvider) {
+.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/rental', {
             templateUrl: 'modules/rental/rental.html',
             controller: 'RentalCtrl',
@@ -50,19 +50,21 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                 $scope.error = response.data;
             })
 
-            
+
         }
-        
-        $scope.search = {mail:""};
+
+        $scope.search = {
+            mail: ""
+        };
 
         $scope.searchClient = function () {
-            
+
             $scope.userSearched = true;
-            
+
             $scope.loading = $http({
                 method: 'PUT',
                 url: 'http://bikes4freeg5.herokuapp.com/client/m',
-//                url: 'http://localhost:8080/client/m',
+                //                url: 'http://localhost:8080/client/m',
                 headers: {
                     Authorization: auth
                 },
@@ -90,20 +92,22 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
                     $scope.bike = bikeS;
                     $scope.venueName = venueS;
-                    
-                    $scope.rentInfo = {userMail:"",
-                                    venueName:$scope.venueName,
-                                    bikeId:$scope.bike.id};
+
+                    $scope.rentInfo = {
+                        userMail: "",
+                        venueName: $scope.venueName,
+                        bikeId: $scope.bike.id
+                    };
 
                     $scope.okRent = function () {
 
                         var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
-                        
-                        
+
+
                         $scope.rentingBike = $http({
                             method: 'POST',
                             url: 'http://bikes4freeg5.herokuapp.com/rentplace/r',
-//                            url: 'http://localhost:8080/rentplace/r',
+                            //                            url: 'http://localhost:8080/rentplace/r',
                             data: JSON.stringify($scope.rentInfo),
                             headers: {
                                 "Authorization": accessToken
@@ -142,16 +146,24 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
 
         };
 
+
+
+
+
+
+
+
+
         $scope.returnBike = function () {
 
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'return-bike.html',
                 controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, venues, $base64) {
-                    
-                
+
+
                     var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
-                    
+
                     $scope.venues = venues;
                     $scope.returningBike = $http({
                         method: 'GET',
@@ -163,37 +175,54 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                         $scope.rentals = response.data;
                     }, function errorCallback(response) {
                         $scope.error = response.data;
-                    }).finally(function () {
+                    }).finally(function () {});
+
+                    $scope.returnInfo = {
+
+                        mantenimiento: false
+                    };
+
+                    $scope.loading = $http({
+                        method: 'GET',
+                        url: 'http://bikes4freeg5.herokuapp.com/reparacion/',
+                        headers: {
+                            Authorization: auth
+                        }
+                    }).then(function successCallback(response) {
+                        $scope.reparaciones = response.data;
+                        console.log(response.data);
+                    }, function errorCallback(response)  {
+                        $scope.error = response.data;
                     });
-                    
-                    $scope.returnInfo = {rental:"",
-                                         returnPoint:"",
-                                         mail:"",
-                                         pedals:false,
-                                         saddle:false,
-                                         handlebars:false,
-                                         brakes:false,
-                                         shifter:false,
-                                         holder:false,
-                                         frontGrid:false,
-                                         backGrid:false,
-                                         reflective:false,
-                                         plate:false,
-                                         bikeBacking:false,
-                                         frontFender:false,
-                                         backFender:false,
-                                         frame:false,
-                                         octopus:false,
-                                         handle:false,
-                                         mantenimiento:false
-                                        };
-                    
+
+                    $scope.selection = [];
+
+                    $scope.toggleSelection = function toggleSelection(fixId) {
+                        var idx = $scope.selection.indexOf(fixId);
+
+                        // is currently selected
+                        if (idx > -1) {
+                            $scope.selection.splice(idx, 1);
+                        }
+
+                        // is newly selected
+                        else {
+                            $scope.selection.push(fixId);
+                        }
+
+                        $scope.returnInfo.selected = $scope.selection;
+                        console.log($scope.returnInfo);
+                    };
+
+
                     $scope.okReturn = function () {
+
+
 
                         $scope.returningBike = $http({
                             method: 'POST',
                             url: 'http://bikes4freeg5.herokuapp.com/rental',
-//                            url: 'http://localhost:8080/rental',
+                            //                            url: 'http://localhost:8080/rental',
                             data: JSON.stringify($scope.returnInfo),
                             headers: {
                                 "Authorization": accessToken
@@ -240,7 +269,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                         return $scope.currentVenue;
                     }
                 }
-                
+
             });
 
             modalInstance.result.then(function (reserva) {
