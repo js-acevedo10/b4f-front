@@ -7,11 +7,11 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
             templateUrl: 'modules/rental/rental.html',
             controller: 'RentalCtrl',
             resolve: {
-                "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                "logged": ['$localStorage', '$location', '$base64', function ($localStorage, $location, $base64) {
                     if ($localStorage.userInfo == undefined) {
                         $location.path('/login');
                     }
-                    if ($localStorage.userInfo.role != "manager") {
+                    if ($base64.decode($localStorage.userInfo[$base64.encode('role')]) != "manager") {
                         $location.path('/login');
                     }
                 }]
@@ -184,7 +184,8 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                                          backFender:false,
                                          frame:false,
                                          octopus:false,
-                                         handle:false
+                                         handle:false,
+                                         mantenimiento:false
                                         };
                     
                     $scope.okReturn = function () {

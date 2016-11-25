@@ -7,10 +7,10 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
             templateUrl: 'modules/user-rental/user-rental.html',
             controller: 'usrRentalCtrl',
             resolve: {
-                "logged": ['$localStorage', '$location', function ($localStorage, $location) {
+                "logged": ['$localStorage', '$location', '$base64', function ($localStorage, $location, $base64) {
                     if ($localStorage.userInfo == undefined) {
                         $location.path('/login');
-                    } else if ($localStorage.userInfo.role != "client") {
+                    } else if ($base64.decode($localStorage.userInfo[$base64.encode('role')]) != "client") {
                         $location.path('/dashboard');
                     }
                 }]
@@ -20,7 +20,7 @@ angular.module('b4f.userRental', ['ngRoute', 'ngStorage'])
     .controller('usrRentalCtrl', ['$scope', '$http', '$localStorage', '$location', '$route', '$uibModal', '$base64', function ($scope, $http, $localStorage, $location, $route, $uibModal, $base64) {
 
         var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
-        var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
+        var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
         
         $scope.loading = $http({
             method: 'GET',

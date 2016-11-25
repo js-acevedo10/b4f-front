@@ -4,7 +4,7 @@
         <div class="squareContainer content" cg-busy="{promise:bikesPromise,minDuration:1000}">
             <div class="row" style="width:90%" ng-hide="addingBike || editMode">
                 <center>
-                    <h1>Bikes</h1>
+                    <h1>System Bikes</h1>
                 </center>
                 <hr/>
                 <div style="height: 40vh !important; overflow: scroll;">
@@ -17,15 +17,43 @@
                             <th>BikeType</th>
                             <th>Actions</th>
                         </tr>
-                        <tr ng-repeat="bike in bikes" class="success">
+                        <tr ng-repeat="bike in bikes" ng-if="!bike.mantenimiento" class="success">
                             <td>{{bike.id}}</td>
                             <td>{{bike.brand}}</td>
                             <td>{{bike.damaged}}</td>
                             <td>{{bike.available}}</td>
                             <td>{{bike.bikeType.name}}</td>
                             <td>
-                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="editBike(bike)">Edit</button>
-                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="deleteBike(bike)">Remove</button>
+                                <a id="{{$parent.$index}}-edit-btn" ng-click="editBike(bike)">Edit</a><br>
+                                <a id="{{$parent.$index}}-delete-btn" ng-click="deleteBike(bike)">Remove</a>
+                                <a id="{{$parent.$index}}-delete-btn" ng-click="mantenimientoOff(bike)">Send to maintenance</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <center>
+                    <h1>Bikes in Maintenance</h1>
+                </center>
+                <hr/>
+                <div style="height: 40vh !important; overflow: scroll;">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Bike ID</th>
+                            <th>Brand</th>
+                            <th>Damaged</th>
+                            <th>Maintenance</th>
+                            <th>BikeType</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr ng-repeat="bike in bikes" ng-if="bike.mantenimiento" class="success">
+                            <td>{{bike.id}}</td>
+                            <td>{{bike.brand}}</td>
+                            <td>{{bike.damaged}}</td>
+                            <td>{{bike.mantenimiento}}</td>
+                            <td>{{bike.bikeType.name}}</td>
+                            <td>
+                                <a id="{{$parent.$index}}-edit-btn" ng-click="mantenimientoOff(bike)">Set as Available</a>
                             </td>
                         </tr>
                     </table>

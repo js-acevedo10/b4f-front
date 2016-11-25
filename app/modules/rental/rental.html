@@ -125,10 +125,12 @@
                     <label><input type="checkbox" ng-model="returnInfo.octopus"> Octopus</label>
                     <br>
                     <label><input type="checkbox" ng-model="returnInfo.handle"> Handle</label>
+                    <br>
+                    <label><input type="checkbox" ng-model="returnInfo.mantenimiento"> Send to Maintenance</label>
                 </div>
                 <div class="modal-footer">
                     <button class="btn-sp-red" type="button" ng-click="dismiss()">Close</button>
-                    <button type="submit" class="btn-sp-blue" type="submit">Return bike</button>
+                    <button type="submit" class="btn-sp-blue" type="submit">Return bike <span ng-show="returnInfo.mantenimiento">and send to maintenance</span></button>
                 </div>
             </form>
         </script>

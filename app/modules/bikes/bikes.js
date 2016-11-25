@@ -77,6 +77,25 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
             }
         };
 
+        $scope.mantenimientoOff = function (bike) {
+            bike.mantenimiento = !bike.mantenimiento;
+            bike.available = true;
+            $scope.bikesPromise = $http({
+                method: 'PUT',
+                url: 'http://bikes4freeg5.herokuapp.com/bikes/' + bike.id,
+                //url: 'http://localhost:8080/bikeTypes',
+                headers: {
+                    Authorization: auth
+                },
+                data: JSON.stringify(bike)
+            }).then(function successCallback(response) {
+                console.log("exito");
+            }, function errorCallback(response)  {
+                console.error(response);
+            })
+
+        }
+
         $scope.saveType = function () {
             $scope.addingType = true;
             if ($scope.newType != undefined) {
