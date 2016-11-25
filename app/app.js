@@ -19,7 +19,8 @@ angular.module('b4f', [
     'b4f.users',
     'b4f.booking',
     'b4f.rental',
-    'b4f.userRental'
+    'b4f.userRental',
+    'b4f.map'
 ])
     .controller('NavController', ['$scope', '$localStorage', '$location', '$base64', function ($scope, $localStorage, $location, $base64) {
         $scope.isLoginNav = function () {

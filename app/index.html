@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
 </head>
 
 <body ng-controller="NavController">
@@ -32,6 +33,7 @@
         <a href="#!/urental" ng-click="closeNav()" ng-if="isUser()">Rentals</a>
         <a href="#!/admin/users" ng-click="closeNav()" ng-if="isAdmin()">Users</a>
         <a href="#!/rental" ng-click="closeNav()" ng-if="isManager()">Bike Rental</a>
+        <a href="#!/map" ng-click="closeNav()">Locations</a>
         <hr>
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
     </div>
