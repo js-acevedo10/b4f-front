@@ -75,7 +75,22 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
     }
 
     $scope.savePlace = function () {
-        $scope.venuesPromise = $http({
+        $scope.coordinatesPromise = $http({
+            method: 'GET',
+            url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+$scope.newPlace.address.replace(" ","+").replace("#","")+",+Bogotá,+Colombia&key=AIzaSyAliwV2fQFHtOTJl9Sd0OB0_bHIKf5zXGg",
+            
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            if(response.data.results===undefined||response.data.results.length==0)
+                {alert("Place coordinates not found, try other address format")}
+            else{
+                var loc = response.data.results[0].geometry.location;
+            var posObj={
+                latitude: loc.lat,
+                longitude: loc.lng
+            }
+            $scope.newPlace.coordinates=posObj;
+                    $scope.venuesPromise = $http({
             method: 'POST',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace',
             headers: {
@@ -92,6 +107,13 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             $scope.editMode = false;
             $scope.fetchPlaces();
         });
+            }
+            
+        }, function errorCallback(response)  {
+            console.log("error places: ");
+            console.log(response);
+        })
+
     }
     $scope.saveEditedPlace = function () {
         $scope.venuesPromise = $http({
