@@ -1,42 +1,81 @@
 <div class="container-fluid white">
-    <div ng-controller="DashboardCtrl"> 
-        <center>
-            <h1>Dashboard</h1>
-        </center>
-        <br>
-        <center>
-            <div class="squareContainer">
-                <h2>Popular Venues (Top 5)</h2>
-                <div ng-repeat="venue in venues | orderBy: '-reservations' | limitTo:5">
-                    <b>{{venue.name}}</b>
-                    <br>
-                    <p># Rentals: {{venue.reservations}}</p>
+    <div ng-controller="DashboardCtrl">
+        <div class="donacion" ng-show="donacionMode" style="text-align: center;">
+            <h1>Donations</h1>
+            <hr>
+            <p>With your help we can repair all those flat tires from our bikes all over the city. The minimum amount is $100.</p>
+            <form class="form-inline" name="donacionForm">
+                <div class="form-group">
+                    <label class="sr-only" for="monto">Amount (in dollars)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">$</div>
+                        <input type="number" class="form-control" id="monto" name="monto" placeholder="Amount" min="100" ng-model="donacion.monto" required>
+                        <div class="input-group-addon">.00</div>
+                    </div>
                 </div>
-                 <h2>Routes</h2>
-                <div ng-repeat="(key,value) in rentals | groupBy: '[origin.name , drop.name]'" >
-                    <p ng-if="key.split(',')[1]">{{key.split(',')[0]}} - {{key.split(',')[1]}} Cantidad </p>
+                <button type="submit" class="btn btn-primary" ng-click="donacionForm.$valid && donate()">Transfer cash</button>
+                <div ng-messages="donacionForm.monto.$error" role="alert" class="errorMessage" ng-if="donacionForm.monto.$dirty">
+                    <div ng-message="required">Hey!! It's that a 0?.</div>
+                    <div ng-message="min">Don't be that cheap.</div>
                 </div>
-                <h2>Trip Duration</h2>
-                <div>
-                <canvas id="line" class="chart chart-line" chart-data="data"
-                    chart-labels="labels" chart-series="series" chart-options="options"
-                    chart-dataset-override="datasetOverride"</canvas> 
-                </div>
+            </form>
+            <hr>
+            <a ng-click="showDonacionMode()">I'm too cheap to make a donation. Take me back.</a>
+        </div>
+        <div ng-hide="donacionMode">
+            <div class="alert alert-warning alertaDonacion" role="alert">
+                <strong>Help us</strong> paying all those flat tires!
+                <a ng-click="showDonacionMode()" class="alert-link">donate</a> .
+            </div>
+            <center>
+                <h1>Dashboard</h1>
+            </center>
+            <br>
+            <center>
+                <div class="squareContainer">
+                    <h2>Popular Venues (Top 5)</h2>
+                    <div ng-repeat="venue in venues | orderBy: '-reservations' | limitTo:5">
+                        <b>{{venue.name}}</b>
+                        <br>
+                        <p># Rentals: {{venue.reservations}}</p>
+                    </div>
+                    <h2>Routes</h2>
+                    <div ng-repeat="(key,value) in rentals | groupBy: '[origin.name , drop.name]'">
+                        <p ng-if="key.split(',')[1]">{{key.split(',')[0]}} - {{key.split(',')[1]}} Cantidad </p>
+                    </div>
+                    <h2>Trip Duration</h2>
+                    <div>
+                        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" />
+                    </div>
                     <h4>Hours</h4>
-                <h2>Preferred Hours</h2>
-                <div>
-                <canvas id="line2" class="chart chart-line" chart-data="data2"
-                    chart-labels="labels2" chart-series="series2" chart-options="options2"
-                    chart-dataset-override="datasetOverride2"</canvas> 
-                </div>
+                    <hr>
+                    <h2>Preferred Hours</h2>
+                    <div>
+                        <canvas id="line2" class="chart chart-line" chart-data="data2" chart-labels="labels2" chart-series="series2" chart-options="options2" chart-dataset-override="datasetOverride2" />
+                    </div>
                     <h4>Hour</h4>
                     <p>Hours are converted to your own TimeZone</p>
-            </div>
-                
-            </div>
-        </center>
+                    <hr>
+                    <h2>Donations</h2>
+                    <div class="donaciones" ng-if="role == 'admin'">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Donation ID</th>
+                                <th>User ID</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                            <tr ng-repeat="don in donaciones" class="success">
+                                <td>{{don.id}}</td>
+                                <td>{{don.userId}}</td>
+                                <td>{{don.fecha | date: 'd / MMM / y'}}</td>
+                                <td>{{don.amount | currency}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </center>
+        </div>
     </div>
-
-
 </div>
 <link rel="stylesheet" href="/modules/dashboard/dashboard.css">
