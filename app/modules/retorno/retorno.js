@@ -19,7 +19,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
 .controller('PlaceCtrl', ['$scope', '$http', '$localStorage', '$location', '$base64', function ($scope, $http, $localStorage, $location, $base64) {
     $scope.editMode = false;
     $scope.editPlace = function (place) {
-        console.log(place);
         $scope.venuesPromise = $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/rentplace/' + place.id,
@@ -29,7 +28,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
         }).then(function successCallback(response) {
             $scope.newPlace = response.data;
             $scope.newPlace.$oid = place.id;
-            console.log(response.data);
             $scope.editMode = true;
             return response;
 
@@ -51,7 +49,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             }
         }).then(function successCallback(response) {
             $scope.places = response.data;
-            console.log(response.data);
         }, function errorCallback(response)  {
             console.log("error places: ");
             console.log(response);
@@ -80,7 +77,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+$scope.newPlace.address.replace(" ","+").replace("#","")+",+Bogotá,+Colombia&key=AIzaSyAliwV2fQFHtOTJl9Sd0OB0_bHIKf5zXGg",
             
         }).then(function successCallback(response) {
-            console.log(response.data);
             if(response.data.results===undefined||response.data.results.length==0)
                 {alert("Place coordinates not found, try other address format")}
             else{
@@ -98,7 +94,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             },
             data: JSON.stringify($scope.newPlace)
         }).then(function successCallback(response) {
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         }).finally(function () {
@@ -124,7 +119,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
             },
             data: JSON.stringify($scope.newPlace)
         }).then(function successCallback(response) {
-            console.log(response.data);
         }, function errorCallback(response)  {
 
         }).finally(function () {
@@ -142,7 +136,6 @@ angular.module('b4f.retorno', ['ngRoute', 'ngStorage'])
                 Authorization: auth
             }
         }).then(function successCallback(response) {
-            console.log("Delete succeded ");
             $scope.editMode = false;
             $scope.fetchPlaces();
             return response;

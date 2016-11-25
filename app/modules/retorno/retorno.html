@@ -1,4 +1,4 @@
-<div class="container-fluid white">
+<div class="container-fluid darkBG">
     <br>
     <center>
         <div class="squareContainer content" cg-busy="{promise:venuesPromise,minDuration:1000}">
@@ -8,33 +8,30 @@
                 </center>
                 <hr/>
                 <div style="height: 55vh !important; overflow: scroll;">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Venue ID</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Storing Capacity</th>
-                            <th>Bikes</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr ng-repeat="place in places" class="success">
-                            <td>{{place.id}}</td>
-                            <td>{{place.name}}</td>
-                            <td>{{place.address}}</td>
-                            <td>{{place.storingCapacity}}</td>
-                            <td>
-                                <a href="#!/bikes" ng-repeat="bike in place.bikes" ng-if="!bike.deleted">
-                                    <p>{{bike.id}}</p>
-                                </a>
-                            </td>
-                            <td>
-                                <button id="{{$parent.$index}}-edit-btn" class="btn btn-default btn-sm btn-block" ng-click="editPlace(place)">Edit</button>
-                                <button id="{{$parent.$index}}-delete-btn" class="btn btn-default btn-sm btn-block" ng-click="deletePlace(place)">Remove</button>
-                            </td>
-                        </tr>
-                    </table>
+                   <div class="row">
+                       <div class="col-xs-12 col-md-6 venue" ng-repeat="place in places">
+                          <div class="row">
+                              <div class="col-xs-6">
+                                  <h3>{{place.name}}</h3>
+                                  <h4>{{place.address}}</h4>
+                                  <p>Capacity: {{place.storingCapacity}}</p>
+                                  <button id="{{$parent.$index}}-edit-btn" class="btn btn-default" ng-click="editPlace(place)">Edit</button>
+                                  <button id="{{$parent.$index}}-delete-btn" class="btn btn-default red" ng-click="deletePlace(place)">Remove</button>
+                              </div>
+                              <div class="col-xs-6">
+                                <br>
+                                 <h4>Bikes:</h4>
+                                  <a href="#!/bikes" ng-repeat="bike in place.bikes" ng-if="!bike.deleted">
+                                      <p>{{bike.brand}}</p>
+                                  </a>
+                                  
+                              </div>
+                          </div>
+                       </div>
+                   </div>
                 </div>
             </div>
+            <br>
             <div ng-show="editMode">
                 <h1>Edit the Venue in {{newPlace.address}}</h1>
                <br>

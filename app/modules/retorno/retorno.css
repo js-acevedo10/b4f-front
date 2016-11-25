@@ -4,3 +4,72 @@
     margin-right: auto;
     height: 90vh;
 }
+
+h1, h2, h3, h4, h5, p, a, label {
+    color: white;
+}
+
+p:hover{
+    color: #2FAC66;
+}
+
+.squareContainer{
+    background-color: rgb(57, 67, 80);
+    width: 90%;
+    height: 200px;
+    border: none;
+    border-radius: 25px;
+    border-color: rgb(230, 230, 230);
+    overflow: auto;
+    height: 100%;
+    margin-bottom: 20px;
+}
+.clickable {
+    color:#2FAC66;
+}
+
+.clickable:hover{
+    color:white;
+    cursor: pointer;
+}
+.clickable-red {
+    color:tomato;
+}
+
+.clickable-red:hover{
+    color:white;
+    cursor: pointer;
+}
+
+.btn{
+    margin-bottom: 20px;
+    background-color: #2FAC66;
+    color: white;
+    border: none;
+}
+.btn:hover{
+    margin-bottom: 20px;
+    background-color: white;
+    color: #2FAC66;
+}
+
+.well > h2, .well > h4{
+    color: #2FAC66;
+}
+
+.red{
+    background-color: white !important;
+    color: tomato !important;
+}
+
+.red:hover{
+    background-color: tomato !important;
+    color: white !important;
+}
+
+.venue{
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: rgb(230, 230, 230);
+    min-height: 220px;
+}
