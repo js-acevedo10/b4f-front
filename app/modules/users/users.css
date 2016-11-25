@@ -2,7 +2,7 @@
     width: 100%;
 }
 .client{
-    text-align:left;
+    text-align:center;
     overflow-x: scroll;
 }
 .clients{   
@@ -164,6 +164,7 @@ p:hover{
 .dark{
     background-color: rgb(108, 129, 150) !important;
     color: white !important;
+    width: 100%;
 }
 
 .dark:hover{
