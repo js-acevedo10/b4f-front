@@ -6,30 +6,6 @@
                 <h1 class="text-left dark">System Bikes</h1>
                 <hr/>
                 <div style="height: 60vh !important; overflow: scroll;">
-<!--
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Bike ID</th>
-                            <th>Brand</th>
-                            <th>Damaged</th>
-                            <th>Available</th>
-                            <th>BikeType</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr ng-repeat="bike in bikes" ng-if="!bike.mantenimiento" class="success">
-                            <td>{{bike.id}}</td>
-                            <td>{{bike.brand}}</td>
-                            <td>{{bike.damaged}}</td>
-                            <td>{{bike.available}}</td>
-                            <td>{{bike.bikeType.name}}</td>
-                            <td>
-                                <a id="{{$parent.$index}}-edit-btn" ng-click="editBike(bike)">Edit</a><br>
-                                <a id="{{$parent.$index}}-delete-btn" ng-click="deleteBike(bike)">Remove</a>
-                                <a id="{{$parent.$index}}-delete-btn" ng-click="mantenimientoOff(bike)">Send to maintenance</a>
-                            </td>
-                        </tr>
-                    </table>
--->
                     <div class="row">
                         <div class="col-xs-12 col-md-4 bike" ng-repeat="bike in bikes" ng-if="!bike.mantenimiento">
                             <img src="/modules/bikes/img/bike.jpg">
