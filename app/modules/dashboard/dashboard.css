@@ -2,3 +2,11 @@
     text-align: center;
     margin-top: 10%;
 }
+.bike_buttons button{
+    background-color: #2FAC66;
+    color: white;
+    margin-top: 10px;
+    border-style: none;
+    width: 30%;
+    height: 40px;
+}

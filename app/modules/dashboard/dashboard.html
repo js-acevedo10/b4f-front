@@ -32,6 +32,10 @@
             </center>
             <br>
             <center>
+                <div class="bike_buttons">
+               <button id="generate-report" class="" ng-click="generateReport()" ng-if="isAdmin()">Generate Report</button>        
+                </div>
+                   <br><br>
                 <div class="squareContainer">
                     <h2>Popular Venues (Top 5)</h2>
                     <div ng-repeat="venue in venues | orderBy: '-reservations' | limitTo:5">
