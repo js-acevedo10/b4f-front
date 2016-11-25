@@ -22,7 +22,37 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage', 'chart.js'])
     var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
     $scope.role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('role')]) : undefined;
     $scope.donacionMode = false;
+        $scope.fetchPenalties = function(){
+            $http({
+            method: 'GET',
+            url: 'http://bikes4freeg5.herokuapp.com/client',
+//                    url: 'http://localhost:8080/client',
+            headers: {
+                Authorization: auth
+            }
+        }).then(function successCallback(response) {
+            $scope.penalties = response.data;
+        }, function errorCallback(response)  {
 
+        })
+        }
+        $scope.fetchPenalties();
+        $scope.fetchBikes = function () {
+            $scope.bikesPromise = $http({
+                method: 'GET',
+                url: 'http://bikes4freeg5.herokuapp.com/bikes',
+                //          url: 'http://localhost:8080/bikes',
+
+                headers: {
+                    Authorization: auth
+                }
+            }).then(function successCallback(response) {
+                $scope.bikes = response.data;
+            }, function errorCallback(response)  {
+
+            })
+        }
+        $scope.fetchBikes();
     $scope.fetchReserves = function () {
         $scope.bikesPromise = $http({
             method: 'GET',
@@ -167,12 +197,14 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage', 'chart.js'])
     }
     
     $scope.generateReport = function(){
+        if($scope.venues&&$scope.rentals&&$scope.donaciones&&$scope.bikes&&$scope.penalties)
+            {
         var completeObj={
             venues: $scope.venues,
             rentals: $scope.rentals,
             donations: $scope.donaciones,
-         //   bikes: $scope.bikes,
-        //    penalties: $scope.penalties
+            bikes: $scope.bikes,
+            penalties: $scope.penalties
         }
         var items = completeObj.venues
         var replacer = (key, value) => value === null||value===undefined ? '' : value // specify how you want to handle null values here
@@ -195,8 +227,24 @@ angular.module('b4f.dashboard', ['ngRoute', 'ngStorage', 'chart.js'])
         csv.unshift(header.join(','))
         csvText += csv.join('\r\n')
         csvText += '\r\n\r\n'
-        
+        csvText += 'Bikes\r\n'
+        var items = completeObj.bikes
+        var header = Object.keys(items[0])
+        csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+        csv.unshift(header.join(','))
+        csvText += csv.join('\r\n')
+        csvText += '\r\n\r\n'
+        csvText += 'Penalties\r\n'
+        var items = completeObj.penalties
+        var header = Object.keys(items[0])
+        csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+        csv.unshift(header.join(','))
+        csvText += csv.join('\r\n')
+        csvText += '\r\n\r\n'
         downloadCSV(csvText)
+            }else{
+                alert('Please wait, loading information for your report')
+            }
          //Generate a file name
  
     }
