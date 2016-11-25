@@ -222,7 +222,7 @@ angular.module('b4f.rental', ['ngRoute', 'ngStorage'])
                         $scope.returningBike = $http({
                             method: 'POST',
                             url: 'http://bikes4freeg5.herokuapp.com/rental',
-                            //                            url: 'http://localhost:8080/rental',
+//                                                        url: 'http://localhost:8080/rental',
                             data: JSON.stringify($scope.returnInfo),
                             headers: {
                                 "Authorization": accessToken
