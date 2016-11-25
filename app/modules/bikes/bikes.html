@@ -3,11 +3,10 @@
     <center>
         <div class="squareContainer content" cg-busy="{promise:bikesPromise,minDuration:1000}">
             <div class="row" style="width:90%" ng-hide="addingBike || editMode">
-                <center>
-                    <h1>System Bikes</h1>
-                </center>
+                <h1 class="text-left dark">System Bikes</h1>
                 <hr/>
-                <div style="height: 40vh !important; overflow: scroll;">
+                <div style="height: 60vh !important; overflow: scroll;">
+<!--
                     <table class="table table-striped">
                         <tr>
                             <th>Bike ID</th>
@@ -30,11 +29,31 @@
                             </td>
                         </tr>
                     </table>
+-->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 bike" ng-repeat="bike in bikes" ng-if="!bike.mantenimiento">
+                            <img src="/modules/bikes/img/bike.jpg">
+                            <h1>{{bike.brand}}</h1>
+                            <div class="bike_item">
+                                <p>Damaged: {{bike.damaged?"Yes":"No"}}</p>
+                            </div>
+                            <div class="bike_item">
+                                <p>Available: {{bike.available?"Yes":"No"}}</p>
+                            </div>
+                            <div class="bike_item">
+                                <p>Type: {{bike.bikeType.name}}</p>
+                            </div>
+
+                            <div class="bike_buttons">
+                                <button id="{{$parent.$index}}-edit-btn" class="" ng-click="editBike(bike)">Edit</button>
+                                <button id="{{$parent.$index}}-report-btn" class="" ng-click="mantenimientoOff(bike)">Maintenance</button>
+                                <button id="{{$parent.$index}}-delete-btn" class="red" ng-click="deleteBike(bike)">Remove</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr>
-                <center>
-                    <h1>Bikes in Maintenance</h1>
-                </center>
+                <h1 class="text-left dark">Bikes in Maintenance</h1>
                 <hr/>
                 <div style="height: 40vh !important; overflow: scroll;">
                     <table class="table table-striped">
