@@ -163,3 +163,15 @@ body {
     font-size: 15px;
     color: orangered;
 }
+.map-wrapper {
+  position: relative;
+  height: calc(100vh - 4em - 64px);
+}
+
+.angular-google-map-container {
+    position: absolute;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0; 
+}

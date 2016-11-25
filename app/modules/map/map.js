@@ -24,15 +24,7 @@ angular.module('b4f.map', ['ngRoute', 'ngStorage','uiGmapgoogle-maps'])
     var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
     var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('role')]) : undefined;
     var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
-   $scope.map = {
-                events: {
-                    tilesloaded: function (map) {
-                        $scope.$apply(function () {
-                            $log.info('this is the map instance', map);
-                        });
-                    }
-                }
-            }
+   $scope.map = { center: { latitude: 4.71, longitude: -74.07 }, zoom: 8 };
 
 
 
