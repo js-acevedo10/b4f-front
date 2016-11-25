@@ -1,0 +1,38 @@
+h1, h2, h3, h4, h5, p, a, label {
+    color: white;
+}
+
+.squareContainer{
+    background-color: rgb(57, 67, 80);
+    width: 90%;
+    height: 200px;
+    border: none;
+    border-radius: 25px;
+    border-color: rgb(230, 230, 230);
+    overflow: auto;
+    height: 100%
+}
+.clickable {
+    color:#2FAC66;
+}
+
+.clickable:hover{
+    color:white;
+    cursor: pointer;
+}
+
+.btn{
+    margin-bottom: 20px;
+    background-color: #2FAC66;
+    color: white;
+    border: none;
+}
+.btn:hover{
+    margin-bottom: 20px;
+    background-color: white;
+    color: #2FAC66;
+}
+
+.well > h2, .well > h4{
+    color: #2FAC66;
+}

@@ -27,7 +27,6 @@
         <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
         <a href="#!/dashboard" ng-click="closeNav()">Dashboard</a>
         <a href="#!/bikes" ng-click="closeNav()" ng-if="isAdmin() || isManager()">Bikes</a>
-        <a href="#!/fixes" ng-click="closeNav()" ng-if="isAdmin()">Fixes</a>
         <a href="#!/rentplace" ng-click="closeNav()" ng-if="isAdmin() || isManager()">Venues</a>
         <a href="#!/penalty" ng-click="closeNav()">Penalties</a>
         <a href="#!/booking" ng-click="closeNav()" ng-if="isUser()">Booking</a>
@@ -36,6 +35,7 @@
         <a href="#!/rental" ng-click="closeNav()" ng-if="isManager()">Bike Rental</a>
         <a href="#!/map" ng-click="closeNav()">Locations</a>
         <hr>
+        <a href="#!/fixes" ng-click="closeNav()" ng-if="isAdmin()">Settings</a>
         <a href="#!/guide" ng-click="closeNav()">Guide</a>
         <hr>
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>

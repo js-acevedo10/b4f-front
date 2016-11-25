@@ -120,7 +120,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                     };
 
                     $scope.okAdd = function () {
-                        
+
                         var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
                         $scope.addingClient = $http({
                             method: 'POST',
@@ -145,8 +145,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                     };
                 },
                 size: 'lg',
-                resolve: {
-                }
+                resolve: {}
             });
 
             modalInstance.result.then(function (reserva) {
@@ -156,7 +155,67 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
             });
 
         };
-        
+
+        $scope.penalizeClient = function (client) {
+            $scope.clientAccounted = undefined;
+            var auth = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+            $scope.penalizingClient = $http({
+                method: 'POST',
+                url: 'http://bikes4freeg5.herokuapp.com/penalty/' + client.id,
+                headers: {
+                    "Authorization": auth
+                }
+            }).then(function successCallback(response) {
+                $scope.succes = response.data;
+                if (typeof $scope.succes === 'string' || $scope.succes instanceof String) {
+                    $scope.clientAccounted = "Client bonus have been accounted";
+                } else {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'client-penalties.html',
+                        controller: function ($scope, $location, $uibModalInstance, $http, $filter, $localStorage, $base64) {
+
+                            var accessToken = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('token')]) : undefined;
+                            $scope.loading = $http({
+                                method: 'GET',
+                                url: 'http://bikes4freeg5.herokuapp.com/penalty/' + client.id,
+                                headers: {
+                                    "Authorization": accessToken
+                                }
+                            }).then(function successCallback(response) {
+                                $scope.penalties = response.data;
+                            }, function errorCallback(response) {
+                                $scope.error = response.data;
+                            }).finally(function () {});
+
+                            $scope.dismiss = function () {
+                                $uibModalInstance.dismiss('cancel');
+                            };
+                            
+                            $scope.penaltyClass = function (pending) {
+                                return pending ? 'label-danger' : 'label-success';
+                            };
+                            
+                            $scope.isSuspended = function (date){
+                                return moment(date).fromNow();
+                            };
+                        },
+                        size: 'lg',
+                        resolve: {}
+                    });
+
+                    modalInstance.result.then(function () {
+
+                    }, function () {
+
+                    });
+                }
+            }, function errorCallback(response) {
+                $scope.clientAccounted = "User ponts are inssuficcient to redeem bonus";
+            }).finally(function () {});
+        };
+
+
         $scope.addManager = function () {
 
             var modalInstance = $uibModal.open({
@@ -197,8 +256,7 @@ angular.module('b4f.users', ['ngRoute', 'ngStorage'])
                     };
                 },
                 size: 'lg',
-                resolve: {
-                }
+                resolve: {}
             });
 
             modalInstance.result.then(function (reserva) {

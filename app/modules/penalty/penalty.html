@@ -3,7 +3,7 @@
         <h1>Penalties</h1></div>
     <div class="content squareContainer row">
         <div class="col-md-6 col-sm-12 clients">
-            <button ng-repeat="client in clients" ng-click="searchClientPenalties(client.email)" class="btn btn-default btn-block client">{{client.name}}</button>
+            <button ng-repeat="client in clients" ng-click="searchClientPenalties(client.id, client.email)" class="btn btn-default btn-block client">{{client.name}}</button>
         </div>
         <!--        <div class="col-md-1 col-sm-12"></div>-->
         <div class="col-md-6 col-sm-12 penalties" ng-show="penalties != undefined && penalties.length > 0">
@@ -14,10 +14,13 @@
                     <div class="detail">Fee: {{penalty.fee}}</div>
                 </div>
                 <div class="col-12">
-                    <div class="label label-primary">Training required: {{penalty.trainingRequired?'Yes':'No'}}</div>
+                    <div class="label label-primary">Training required: {{penalty.trainingRequiered?'Yes':'No'}}</div>
                 </div>
                 <div class="col-12">
                     <div class="label" ng-class="penaltyClass(penalty.pending)">Payment pending: {{penalty.pending ? "Yes":"No"}}</div>
+                </div>
+                <div class="col-12">
+                    <div class="label label-warning">Suspended until: {{isSuspended(penalty.suspensionEnd)}}</div>
                 </div>
                 <hr>
             </div>

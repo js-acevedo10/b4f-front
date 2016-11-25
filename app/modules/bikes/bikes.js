@@ -31,7 +31,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                 }
             }).then(function successCallback(response) {
                 $scope.bikes = response.data;
-                console.log(response.data);
             }, function errorCallback(response)  {
 
             })
@@ -89,7 +88,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                 },
                 data: JSON.stringify(bike)
             }).then(function successCallback(response) {
-                console.log("exito");
             }, function errorCallback(response)  {
                 console.error(response);
             })
@@ -161,7 +159,6 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                 }
             }).then(function successCallback(response) {
                 $scope.newBike = response.data;
-                console.log($scope.newBike);
                 $scope.editMode = true;
                 return response;
             }, function errorCallback(response)  {
@@ -226,9 +223,8 @@ angular.module('b4f.bikes', ['ngRoute', 'ngStorage'])
                     Authorization: auth
                 }
             }).then(function successCallback(response) {
-                console.log("Delete succeded ");
                 $scope.editMode = false;
-                $scope.fetchPlaces();
+                $scope.fetchBikes();
                 return response;
             }, function errorCallback(response)  {
                 console.log("error deleting one place: ");

@@ -22,11 +22,15 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
     var role = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('role')]) : undefined;
     var id = $localStorage.userInfo != null && $localStorage.userInfo != undefined ? $base64.decode($localStorage.userInfo[$base64.encode('id')]) : undefined;
     
+    $scope.isSuspended = function (date){
+        return moment(date).fromNow();
+    };
+    
     if (role == "client"){
         $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/client/'+id,
-            //        url: 'http://localhost:8080/client',
+//                    url: 'http://localhost:8080/client'+id,
             headers: {
                 Authorization: auth
             }
@@ -39,13 +43,14 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
         $scope.penaltyClass = function (pending) {
             return pending ? 'label-danger' : 'label-success';
         }
-        $scope.searchClientPenalties = function (userId) {
+        
+        $scope.searchClientPenalties = function (userId, mail) {
             $scope.penalties = [];
-
+            $scope.currentUser = mail;
             $http({
                 method: 'GET',
                 url: 'http://bikes4freeg5.herokuapp.com/penalty/' + userId,
-                //        url: 'http://localhost:8080/penalty/'+userId,
+//                        url: 'http://localhost:8080/penalty/'+userId,
                 headers: {
                     Authorization: auth
                 }
@@ -53,15 +58,15 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
                 $scope.penalties = response.data;
             }, function errorCallback(response)  {
 
-            })
+            });
 
-            $scope.currentUser = userId;
+            
         }
     }else{
         $http({
             method: 'GET',
             url: 'http://bikes4freeg5.herokuapp.com/client',
-            //        url: 'http://localhost:8080/client',
+//                    url: 'http://localhost:8080/client',
             headers: {
                 Authorization: auth
             }
@@ -74,7 +79,7 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
         $scope.penaltyClass = function (pending) {
             return pending ? 'label-danger' : 'label-success';
         }
-        $scope.searchClientPenalties = function (userId) {
+        $scope.searchClientPenalties = function (userId, mail) {
             $scope.penalties = [];
 
             $http({
@@ -88,9 +93,9 @@ angular.module('b4f.penalty', ['ngRoute', 'ngStorage'])
                 $scope.penalties = response.data;
             }, function errorCallback(response)  {
 
-            })
+            });
 
-            $scope.currentUser = userId;
+            $scope.currentUser = mail;
         }
     }
 

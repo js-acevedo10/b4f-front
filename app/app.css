@@ -175,3 +175,7 @@ bottom: 0;
 right: 0;
 left: 0; 
 }
+
+.darkBG {
+    background-color: rgb(74,85,102);
+}

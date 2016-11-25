@@ -1,41 +1,39 @@
-<div class="container-fluid white">
+<link rel="stylesheet" href="/modules/fixes/fixes.css">
+<div class="container-fluid darkBG">
     <br>
     <center>
+        <h1>Settings</h1>
         <div class="squareContainer content">
-
+            <h2>Fees</h2>
+            <hr width="100vw" size="100vw">
             <div style="height: 40vh !important; overflow: scroll;">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Fix ID</th>
-                        <th>Fix Name</th>
-                        <th>Fee</th>
-                        <th>Actions</th>
-                    </tr>
-                    <tr ng-repeat="reparacion in reparaciones" class="success">
-                        <td>{{reparacion.id}}</td>
-                        <td>{{reparacion.fixName}}</td>
-                        <td>{{reparacion.fee}}</td>
-                        <td>
-                            <a id="{{$parent.$index}}-edit-btn" ng-click="editFix(reparacion)">Editar</a>
-                        </td>
-                    </tr>
-                </table>
+                <div class="row" ng-repeat="reparacion in reparaciones">
+                    <div class="col-xs-12 col-md-4">
+                        <h3>{{reparacion.fixName}}</h3>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <h3>{{reparacion.fee}}</h3>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <h3 class="clickable" ng-click="editFix(reparacion)">Edit</h3>
+                    </div>
+                </div>
             </div>
 
             <div ng-show="editMode" class="well">
-                <h3>Editing Fix</h3>
+                <h2>Editing Fee</h2>
                 <form novalidate name="form" id="place-form" role="form" ng-submit="form.$valid && saveEditedRecord()">
                     <fieldset>
                         <input id="id" class="form-control" type="hidden" ng-model="newFix.id" />
-                        <div class="col-md-12">
-                            <h4>Fix Name</h4>
+                        <div class="col-md-12 well">
+                            <h4>Fee name</h4>
                             <input id="fixName" name="fixName" class="form-control" type="text" ng-model="newFix.fixName" required />
 
                         </div>
                         <br>
                         <br>
-                        <div class="col-md-12">
-                            <h4>Fix Fee</h4>
+                        <div class="col-md-12 well">
+                            <h4>Fee amount</h4>
                             <input id="fee" name="fee" class="form-control" type="text" ng-model="newFix.fee" required />
                         </div>
 
@@ -49,14 +47,14 @@
             </div>
 
             <div class="row">
-                <h1>Add new Fix</h1>
+                <h1>Add new fee</h1>
                 <br>
                 <form name="newFixForm" style="width:90%">
 
-                    <label for="fixName">Fix Name</label>
+                    <label for="fixName">Fee Name</label>
                     <input id="fixName" name="fixName" class="form-control" type="text" ng-model="newFix.fixName" required ng-maxlength="20" />
 
-                    <label for="fee">Fixing Fee</label>
+                    <label for="fee">Fee amount</label>
                     <input id="fee" name="fee" class="form-control" type="number" ng-model="newFix.fee" required ng-maxlength="20" />
 
                     <br>
