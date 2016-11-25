@@ -35,6 +35,8 @@
         <a href="#!/rental" ng-click="closeNav()" ng-if="isManager()">Bike Rental</a>
         <a href="#!/map" ng-click="closeNav()">Locations</a>
         <hr>
+        <a href="#!/guide" ng-click="closeNav()">Guide</a>
+        <hr>
         <a ng-click="logOut()" ng-show="isLogged()">LogOut</a>
     </div>
     <div id="main" ng-class="isLoginNav()">
@@ -70,6 +72,7 @@
     <script src="modules/rental/rental.js"></script>
     <script src="modules/map/map.js"></script>
     <script src="modules/user-rental/user-rental.js"></script>
+    <script src="modules/guide/guide.js"></script>
 
     <!--    Css libs-->
     <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">
