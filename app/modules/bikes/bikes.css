@@ -43,7 +43,8 @@
 }
 .bike_item{
     width: 100%;
-    height:35px;
+    height:28px;
+    line-height: 25px;
     border-style: solid;
     border-width: 0px 1px 1px 1px;
     border-color: #2FAC66;
@@ -77,5 +78,5 @@
     background-color: red !important;
 }
 .bikeImg {
-    height: 200px;
+    height: 180px;
 }
