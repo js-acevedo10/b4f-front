@@ -8,7 +8,8 @@
                 <div style="height: 60vh !important; overflow: scroll;">
                     <div class="row">
                         <div class="col-xs-12 col-md-4 bike" ng-repeat="bike in bikes" ng-if="!bike.mantenimiento">
-                            <img src="/modules/bikes/img/bike.jpg">
+<!--                            <img src="/modules/bikes/img/bike.jpg">-->
+                            <img class="bikeImg" ng-src="{{bike.bikeType.imageURL}}">
                             <h1>{{bike.brand}}</h1>
                             <div class="bike_item">
                                 <p>Damaged: {{bike.damaged?"Yes":"No"}}</p>

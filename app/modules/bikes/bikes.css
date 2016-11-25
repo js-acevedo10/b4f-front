@@ -76,3 +76,6 @@
 .red:hover{
     background-color: red !important;
 }
+.bikeImg {
+    height: 200px;
+}
